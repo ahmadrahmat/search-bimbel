@@ -22,12 +22,7 @@
 						<th>No.</th>
 						<th>Username</th>
 						<th>Nama</th>
-						<th>Email</th>
-						<th>Phone</th>
-						<th>Alamat</th>
-						<th>Kota / Provinsi</th>
 						<th>Type / Role</th>
-						<th>Aksi</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -37,10 +32,6 @@
 							<td style="width: 5%"><?= $no++ ?></td>
 							<td><?= $data->username ?></td>
 							<td><?= $data->name ?></td>
-							<td><?= $data->email ?></td>
-							<td><?= $data->phone ?></td>
-							<td><?= $data->address ?></td>
-							<td><?= $data->city_name.' / '.$data->province_name ?></td>
 							<td>
 								<?php if($data->bimbel_user_type_id == 1) { 
 									echo 'superadmin';
@@ -51,14 +42,6 @@
 								} elseif($data->bimbel_user_type_id == 4) {
 									echo 'siswa';
 								} ?>
-							</td>
-							<td class="text-center">
-								<a href="<?= site_url('bimbel_user/edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
-									<i class="fa fa-pen"></i> Update
-								</a>
-								<a href="<?= site_url('bimbel_user/delete/' . $data->id) ?>" onclick="return confirm('Yakin hapus data ini?');" class="btn btn-sm btn-danger">
-									<i class="fa fa-trash"></i> Delete
-								</a>
 							</td>
 						</tr>
 					<?php endforeach ?>

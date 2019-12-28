@@ -21,7 +21,6 @@
 					<tr>
 						<th>No.</th>
 						<th>Nama</th>
-						<th>Aksi</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -30,14 +29,6 @@
 						<tr>
 							<td style="width: 5%"><?= $no++ ?></td>
 							<td><?= $data->name ?></td>
-							<td class="text-center" style="width: 25%">
-								<a href="<?= site_url('subject_type/edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
-									<i class="fa fa-pen"></i> Update
-								</a>
-								<a href="<?= site_url('subject_type/delete/' . $data->id) ?>" onclick="return confirm('Yakin hapus data ini?');" class="btn btn-sm btn-danger">
-									<i class="fa fa-trash"></i> Delete
-								</a>
-							</td>
 						</tr>
 					<?php endforeach ?>
 				</tbody>

@@ -13,6 +13,15 @@ class Bimbel_user_type_m extends CI_Model {
         return $query;
     }
 
+    public function getRegist()
+    {
+        $this->db->from('bimbel_user_type');
+        $this->db->where('id >', '2');
+        
+        $query = $this->db->get();
+        return $query;
+    }
+
     public function add($post)
     {
         $params = array(

@@ -49,7 +49,15 @@
 							<td><?= $data->subject_type_name ?></td>
 							<td><?= $data->subject_name ?></td>
 							<td><?= $this->fungsi->get_student_name($data->student_id)->name ?></td>
-							<td><?= $this->fungsi->get_tutor_name($data->tutor_id)->name ?></td>
+							<td>
+								<?php 
+									$num = 1;
+									$query = $this->db->query("SELECT * FROM subject_tutor WHERE subject_id = $data->subject_id");
+									foreach ($query->result() as $value => $val) : 
+								?>
+								<?= $val->tutor_id != 0 || $val->tutor_id != null ? $num++.'.'. $this->fungsi->get_tutor_name($val->tutor_id)->name : '' ?>
+								<?php endforeach ?>
+							</td>
 							<td><?= $data->start_date ?></td>
 							<td><?= $data->end_date ?></td>
 							<td><?= $data->duration ?> Jam</td>

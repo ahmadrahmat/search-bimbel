@@ -36,6 +36,7 @@ class Model_home extends CI_Model
 		if($city!=null) {
 			$this->db->where('city.name', $city);
 		}
+		$this->db->group_by('subject.organization_id');
 		$this->db->order_by('subject.name', 'asc');
 		$query = $this->db->get()->num_rows();
 		return $query;
@@ -55,11 +56,25 @@ class Model_home extends CI_Model
 			$this->db->where('organization.name', $organization);
 		}
 		if($city!=null) {
-			$this->db->where('city.name', $city);
+			$this->db->where('city.id', $city);
 		}
+		$this->db->group_by('subject.organization_id');
 		$this->db->order_by('subject.name', 'asc');
 		$this->db->limit($limit, $start);
 		$query = $this->db->get();
 		return $query;
 	}
+
+	public function popularbycity()
+	{
+		$query = $this->db->query("SELECT COUNT(organization.id) as counts, city.* FROM organization, city WHERE organization.city_id=city.id GROUP BY organization.city_id ORDER BY counts DESC limit 4");
+		return $query;
+	}
+
+	public function popularbycityAll()
+	{
+		$query = $this->db->query("SELECT COUNT(organization.id) as counts, city.* FROM organization, city WHERE organization.city_id=city.id GROUP BY organization.city_id ORDER BY counts DESC");
+		return $query;
+	}
+
 }

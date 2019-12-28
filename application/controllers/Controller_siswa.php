@@ -34,21 +34,45 @@ class Controller_siswa extends CI_Controller {
 
 	public function process_daftar_bimbel($id)
     {
-        $post = $this->input->post(null, TRUE);
-        if(isset($_POST['add'])) {
-            $this->enrollment_m->add($post);
-        } 
+        //$post = $this->input->post(null, TRUE);
+        //if(isset($_POST['add'])) {
+        //    $this->enrollment_m->add($post);
+        //} 
 
-        if($this->db->affected_rows() >0 ) {
-            $this->session->set_flashdata('success', 'Data berhasil disimpan');
-        }
-        redirect('controller_siswa/semua_bimbel_detail/'.$id);
+        //if($this->db->affected_rows() >0 ) {
+        //    $this->session->set_flashdata('success', 'Data berhasil disimpan');
+        //}
+		//redirect('controller_siswa/semua_bimbel_detail/'.$id);
+		
+		if(isset($_POST['add'])) {
+			$post = array(
+				'start_date'     => $this->input->post('start_date', true),
+				'end_date'       => $this->input->post('end_date', true),
+				'start_time'     => $this->input->post('start_time', true),
+				'duration'       => $this->input->post('duration', true),
+				'num_of_meeting' => $this->input->post('num_of_meeting', true),
+				'phone'          => $this->input->post('phone', true),
+				'note'           => $this->input->post('note', true),
+				'student_id'     => $this->input->post('student_id', true),
+				'subject_id'     => $this->input->post('subject_id', true)
+			);
+			$this->enrollment_m->add($post);
+			//print_r($post);
+			if($this->db->affected_rows() >0 ) {
+			//	$this->session->set_flashdata('success', 'Registration successful. Please login using your username and password!');
+				echo "<script>
+				alert('Data berhasil disimpan');
+				window.location='".site_url('bimbel_yang_di_ikuti')."'
+				</script>";
+			}
+			//redirect('auth/login');
+		} 
 	}
 	
 	public function bimbel_yang_di_ikuti()
 	{
 		$data['row'] = $this->model_siswa->getEnrollmentByIdStudent($this->fungsi->user_login()->id);
-		$this->template->load('template', 'custom_siswa/bimbel_yang_di_ikuti', $data);
+		$this->template->load('frontend/template', 'frontend/my-bimbel', $data);
 	}
 
 }

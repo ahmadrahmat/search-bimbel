@@ -43,33 +43,9 @@
 				<label>Note <sup class="text-danger">*</sup></label>
 				<input type="text" name="note" value="<?= $row->note ?>" class="form-control" required>
 			</div>
-			<div class="form-group">
-				<label>Siswa <sup class="text-danger">*</sup></label>
-				<select name="student_id" class="form-control" required>
-					<option value="">- Pilih -</option>
-					<?php foreach($student->result() as $key => $data) : ?>
-					<option value="<?=$data->id?>" <?=$data->id == $row->student_id ? "selected" : null?>><?=$data->bimbel_user_name?></option>
-					<?php endforeach; ?>
-				</select>
-			</div>
-			<div class="form-group">
-				<label>Subject <sup class="text-danger">*</sup></label>
-				<select name="subject_id" class="form-control" required>
-					<option value="">- Pilih -</option>
-					<?php foreach($subject->result() as $key => $data) : ?>
-					<option value="<?=$data->id?>" <?=$data->id == $row->subject_id ? "selected" : null?>><?=$data->name?></option>
-					<?php endforeach; ?>
-				</select>
-			</div>
-			<div class="form-group">
-				<label>Status <sup class="text-danger">*</sup></label>
-				<input type="hidden" name="id" value="<?= $row->id ?>">
-				<select name="status" class="form-control" required>
-					<option value="0" <?= $row->status == 0 ? 'selected' : '' ?>>Waiting</option>
-					<option value="1" <?= $row->status == 1 ? 'selected' : '' ?>>Approve</option>
-					<option value="2" <?= $row->status == 2 ? 'selected' : '' ?>>Finish</option>
-				</select>
-			</div>
+			<input type="hidden" name="student_id" value="<?= $row->student_id ?>">
+			<input type="hidden" name="subject_id" value="<?= $row->subject_id ?>">
+			<input type="hidden" name="status" value="<?= $row->status ?>">
 			<div class="form-group">
 				<button type="submit" name="<?= $page ?>" class="btn btn-success btn-flat">
 					<i class="fa fa-paper-plane"></i> Save</button>

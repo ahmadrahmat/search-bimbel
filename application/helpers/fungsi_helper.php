@@ -18,6 +18,15 @@ function check_not_login()
     }
 }
 
+function check_not_ts()
+{
+    $ci =& get_instance();
+    $user_sessions = $ci->session->userdata('bimbel_user_type_id');
+    if(($user_sessions == 3) OR ($user_sessions == 4)) {
+        redirect('home');
+    }
+}
+
 function check_admin()
 {
     $ci =& get_instance();

@@ -1,5 +1,11 @@
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Job Application</h1>
+<h1 class="h3 mb-2 text-gray-800">
+	<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 2) : ?>
+		Tutor
+	<?php else : ?>
+		Job Application
+	<?php endif ?>
+</h1>
 <?php $this->view('messages'); ?>
 
 <!-- DataTales Example -->
@@ -31,8 +37,8 @@
 				<label>Tutor <sup class="text-danger">*</sup></label>
 				<select name="tutor_id" class="form-control" required>
 					<option value="">- Pilih -</option>
-					<?php foreach($tutor->result() as $key => $data) : ?>
-					<option value="<?=$data->id?>" <?=$data->id == $row->tutor_id ? "selected" : null?>><?=$data->bimbel_user_name?></option>
+					<?php foreach ($tutor->result() as $key => $data) : ?>
+						<option value="<?= $data->id ?>" <?= $data->id == $row->tutor_id ? "selected" : null ?>><?= $data->bimbel_user_name ?></option>
 					<?php endforeach; ?>
 				</select>
 			</div>

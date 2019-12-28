@@ -53,7 +53,8 @@
 				<label>Type / Role <sup class="text-danger">*</sup></label>
 				<select name="bimbel_user_type_id" class="form-control" required>
 					<option value="">- Pilih -</option>
-					<?php foreach($bimbel_user_type->result() as $key => $data) : ?>
+					<?php $query = $this->db->query("SELECT * FROM bimbel_user_type WHERE id = 1 OR id = 2") ?>
+					<?php foreach($query->result() as $key => $data) : ?>
 					<option value="<?=$data->id?>" <?=$data->id == $row->bimbel_user_type_id ? "selected" : null?>><?=$data->name?></option>
 					<?php endforeach; ?>
 				</select>

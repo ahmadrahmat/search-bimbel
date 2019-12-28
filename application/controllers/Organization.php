@@ -86,4 +86,22 @@ class Organization extends CI_Controller {
         echo "<script>window.location='".site_url('organization')."';</script>";
 	}
 
+	public function switchss()
+	{
+		$mode = $_POST['mode'];
+		$id = $_POST['id'];
+		if ($mode == 'true') //mode is true when button is enabled 
+		{
+			$str = $this->db->query("UPDATE organization SET activated=1 where id=$id");
+			$message = 'Hey my button is enableed!!';
+			$success = 'Enabled';
+			echo json_encode(array('message' => $message, '$success' => $success));
+		} else if ($mode == 'false') {
+			$str = $this->db->query("UPDATE organization SET activated=0 where id=$id");
+			$message = 'Hey my button is disable!!';
+			$success = 'Disabled';
+			echo json_encode(array('message' => $message, 'success' => $success));
+		}
+	}
+
 }

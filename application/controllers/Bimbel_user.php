@@ -106,7 +106,28 @@ class Bimbel_user extends CI_Controller {
 		$this->template->load('template', 'bimbel_user/account_data', $data);
 	}
 
-	public function account_edit($id)
+	public function account_edit_ts($id)
+    {
+        $query = $this->bimbel_user_m->get($id);
+        if($query->num_rows() > 0) {
+			$bimbel_user = $query->row();
+			$query_city = $this->city_m->get();
+			$query_bimbel_user_type = $this->bimbel_user_type_m->get();
+			
+            $data = array(
+                'page' => 'edit',
+				'row' => $bimbel_user,
+				'city' => $query_city,
+				'bimbel_user_type' => $query_bimbel_user_type
+            );
+            $this->template->load('frontend/template', 'frontend/user-profile', $data);
+        } else {
+            echo "<script>alert('Data tidak ditemukan');";
+            echo "<script>window.location='".site_url('home')."';</script>";
+        }
+    }
+    
+    public function account_edit($id)
     {
         $query = $this->bimbel_user_m->get($id);
         if($query->num_rows() > 0) {
@@ -127,7 +148,26 @@ class Bimbel_user extends CI_Controller {
         }
 	}
 	
-	public function account_process()
+    public function account_process_ts()
+    {
+        $post = $this->input->post(null, TRUE);
+        if(isset($_POST['edit'])) {
+            $this->bimbel_user_m->edit($post);
+            $id = $this->input->post('id', TRUE);
+            //print_r($post);
+        } 
+
+        if($this->db->affected_rows() >0 ) {
+            //$this->session->set_flashdata('success', 'Data berhasil disimpan');
+            echo "<script>
+				alert('Data berhasil disimpan');
+				window.location='".site_url('akun/editts/'.$id.'')."'
+				</script>";
+        }
+        //redirect('akun');
+    }
+
+    public function account_process()
     {
         $post = $this->input->post(null, TRUE);
         if(isset($_POST['edit'])) {
@@ -139,4 +179,5 @@ class Bimbel_user extends CI_Controller {
         }
         redirect('akun');
     }
+
 }

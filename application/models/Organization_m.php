@@ -5,10 +5,11 @@ class Organization_m extends CI_Model {
 
     public function get($id = null)
     {
-        $this->db->select('organization.*, owner.id as owner_id, bimbel_user.name as bimbel_user_name, bimbel_user.phone as bimbel_user_phone, bimbel_user.email as bimbel_user_email');
+        $this->db->select('organization.*, owner.id as owner_id, bimbel_user.name as bimbel_user_name, bimbel_user.phone as bimbel_user_phone, bimbel_user.email as bimbel_user_email, city.name as city_name, city.city_type as city_type');
         $this->db->from('organization');
         $this->db->join('owner', 'owner.id = organization.owner_id');
 		$this->db->join('bimbel_user', 'bimbel_user.id = owner.bimbel_user_id');
+		$this->db->join('city', 'city.id = organization.city_id');
         if($id != null) {
             $this->db->where('organization.id', $id);
         }
