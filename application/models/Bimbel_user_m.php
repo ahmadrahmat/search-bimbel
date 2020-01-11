@@ -30,23 +30,23 @@ class Bimbel_user_m extends CI_Model
 
 	public function add($post)
 	{
-		$params['username'] = $post['username'];
-		$params['name'] = $post['name'];
-		$params['password'] = sha1($post['password']);
-		$params['email'] = $post['email'];
-		$params['phone'] = $post['phone'];
-		$params['address'] = $post['address'];
-		$params['city_id'] = $post['city_id'];
+		$params['username']            = $post['username'];
+		$params['name']                = $post['name'];
+		$params['password']            = sha1($post['password']);
+		$params['email']               = $post['email'];
+		$params['phone']               = $post['phone'];
+		$params['address']             = $post['address'];
+		$params['city_id']             = $post['city_id'];
 		$params['bimbel_user_type_id'] = $post['bimbel_user_type_id'];
 		$this->db->insert('bimbel_user', $params);
 
 		if ($post['bimbel_user_type_id'] == 2) {
 			$data['bimbel_user_id'] = $this->db->insert_id();
 			$this->db->insert('owner', $data);
-			$field['name'] = $post['name'];
-			$field['phone'] = $post['phone'];
-			$field['address'] = $post['address'];
-			$field['city_id'] = $post['city_id'];
+			$field['name']     = $post['name'];
+			$field['phone']    = $post['phone'];
+			$field['address']  = $post['address'];
+			$field['city_id']  = $post['city_id'];
 			$field['owner_id'] = $this->db->insert_id();
 			$this->db->insert('organization', $field);
 		} elseif ($post['bimbel_user_type_id'] == 3) {
@@ -99,6 +99,20 @@ class Bimbel_user_m extends CI_Model
 		$this->db->where('tutor.id', $id);
 
 		$query = $this->db->get();
+		return $query;
+	}
+
+	function cekUsername($username="")
+	{
+		$query = $this->db->get_where('bimbel_user', array('username' => $username));
+		$query = $query->result_array();
+		return $query;
+	}
+
+	function cekEmail($email="")
+	{
+		$query = $this->db->get_where('bimbel_user', array('email' => $email));
+		$query = $query->result_array();
 		return $query;
 	}
 }

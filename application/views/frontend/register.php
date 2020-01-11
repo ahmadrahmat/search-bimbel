@@ -1,42 +1,70 @@
 
+
       <!-- Register -->
       <section class="section-padding">
          <div class="container">
             <div class="row">
                <div class="col-lg-5 col-md-5 mx-auto">
+                  <?php if ($this->session->flashdata('username')) : ?>
+                  <div class="alert alert-danger">
+                     <?= $this->session->flashdata('username'); ?>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                  </div>
+                  <?php endif; ?>
+                  <?php if ($this->session->flashdata('email')) : ?>
+                  <div class="alert alert-danger">
+                     <?= $this->session->flashdata('email'); ?>
+                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                  </div>
+                  <?php endif; ?>
                   <div class="card padding-card">
                      <div class="card-body">
                         <h5 class="card-title mb-4">Register</h5>
-                        <form>
-                           <div class="form-group">
-                              <label>Full Name <span class="text-danger">*</span></label>
-                              <input type="text" class="form-control" placeholder="Enter Full Name">
-                           </div>
-                           <div class="form-group">
-                              <label>Mobile Number <span class="text-danger">*</span></label>
-                              <input type="text" class="form-control" placeholder="Enter Mobile Number">
-                           </div>
-                           <div class="form-group">
-                              <label>Email Address <span class="text-danger">*</span></label>
-                              <input type="email" class="form-control" placeholder="Enter Email Address">
-                           </div>
-                           <div class="form-group">
-                              <label>Password <span class="text-danger">*</span></label>
-                              <input type="email" class="form-control" placeholder="Enter Password">
-                           </div>
-                           <div class="form-group">
-                              <div class="custom-control custom-checkbox">
-                                 <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                                 <label class="custom-control-label" for="customControlAutosizing">I agree with all <a href="terms.html">Terms & Conditions</a></label>
-                              </div>
-                           </div>
-                           <button type="submit" class="btn btn-success btn-block">REGISTER</button>
-                        </form>
-                        <div class="mt-4 text-center login-with-social">
-                           <button type="button" class="btn btn-facebook btn-block"><i class="mdi mdi-facebook"></i> Login With Facebook</button>
-                           <button type="button" class="btn btn-twitter btn-block"><i class="mdi mdi-twitter"></i> Login With Twitter</button>
-                           <button type="button" class="btn btn-google btn-block"><i class="mdi mdi-google-plus"></i> Login With Google</button>
+                        <form action="<?= site_url('auth/signup') ?>" method="POST">
+                        <div class="form-group">
+                           <label>Name <sup class="text-danger">*</sup></label>
+                           <input type="text" name="name" class="form-control" placeholder="Enter Name" required>
                         </div>
+                        <div class="form-group">
+                           <label>Username <sup class="text-danger">*</sup></label>
+                           <input type="text" name="username" class="form-control" placeholder="Enter Username" required>
+                        </div>
+                        <div class="form-group">
+                           <label>Password <sup class="text-danger">*</sup></label>
+                           <input type="password" name="password" class="form-control" placeholder="Enter Password" required>
+                        </div>
+                        <div class="form-group">
+                           <label>Email <sup class="text-danger">*</sup></label>
+                           <input type="email" name="email" class="form-control" placeholder="Enter Email" required>
+                        </div>
+                        <div class="form-group">
+                           <label>Phone <sup class="text-danger">*</sup></label>
+                           <input type="text" name="phone" class="form-control" placeholder="Enter Phone" required>
+                        </div>
+                        <div class="form-group">
+                           <label>Address <sup class="text-danger">*</sup></label>
+                           <input type="text" name="address" class="form-control" placeholder="Enter Address" required>
+                        </div>
+                        <div class="form-group">
+                           <label>City <sup class="text-danger">*</sup></label>
+                           <select name="city_id" class="form-control" required>
+                              <option value="">- Choose -</option>
+                              <?php foreach($city->result() as $key => $data) : ?>
+                              <option value="<?=$data->id?>"><?=$data->name?> <?= ucfirst(strtolower($data->city_type)); ?></option>
+                              <?php endforeach; ?>
+                           </select>
+                        </div>
+                        <div class="form-group">
+                           <label>Register as <sup class="text-danger">*</sup></label>
+                           <select name="bimbel_user_type_id" class="form-control" required>
+                              <option value="">- Choose -</option>
+                              <?php foreach($bimbel_user_type->result() as $key => $data) : ?>
+                              <option value="<?=$data->id?>"><?= ucfirst(strtolower($data->name)); ?></option>
+                              <?php endforeach; ?>
+                           </select>
+                        </div>
+                        <button type="submit" name="<?= $page ?>" class="btn btn-success btn-block"><i class="fa fa-paper-plane"></i> SIGN UP</button>
+                     </form>
                      </div>
                   </div>
                </div>

@@ -6,7 +6,7 @@ class Model_siswa extends CI_Model {
 	//custom function model siswa
 	public function getOrganizationWhereActivated($id = null)
     {
-		$this->db->select('organization.*, city.name as city_name');
+		$this->db->select('organization.*, city.name as city_name, city.city_type as city_type');
 		$this->db->from('organization');
 		$this->db->join('city', 'city.id = organization.city_id');
 		$this->db->where('activated', '1');
@@ -48,11 +48,12 @@ class Model_siswa extends CI_Model {
 	//custom function model siswa
 	public function getEnrollmentByIdStudent($id = null)
 	{
-		$this->db->select('enrollment.*, student.id as student_id, subject.name as subject_name, organization.name as organization_name');
+		$this->db->select('enrollment.*, student.id as student_id, subject.name as subject_name, organization.name as organization_name, organization.id as organization_id');
 		$this->db->from('enrollment');
 		$this->db->join('student', 'student.id = enrollment.student_id');
 		$this->db->join('subject', 'subject.id = enrollment.subject_id');
 		$this->db->join('organization', 'organization.id = subject.organization_id');
+		$this->db->order_by('status', 'ASC');
 		if($id != null) {
 			$this->db->where('student.bimbel_user_id', $id);
 		}

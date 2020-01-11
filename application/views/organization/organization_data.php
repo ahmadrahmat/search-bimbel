@@ -40,13 +40,20 @@
 							<td><?= $data->payment ?></td>
 							<td><?= $data->bimbel_user_name ?></td>
 							<td><?= $data->activated == 0 ? 'False' : 'True' ?></td>
-							<td class="text-center" style="width: 25%">
-								<a href="<?= site_url('organization/edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
-									<i class="fa fa-pen"></i> Update
-								</a>
-								<a href="<?= site_url('organization/delete/' . $data->id) ?>" onclick="return confirm('Yakin hapus data ini?');" class="btn btn-sm btn-danger">
-									<i class="fa fa-trash"></i> Delete
-								</a>
+							<td class="text-center">
+								<div class="custom-control custom-switch">
+								<?php if ($data->activated == '0') {
+								?>
+									<input type="checkbox" class="custom-control-input" name="toggle" id="toggle_<?php echo $data->id; ?>" value="<?php echo $data->id; ?>" data-toggle="toggle" data-off="Disabled" data-on="Enabled">
+								<?php
+								} ?>
+								<?php if ($data->activated == '1') {
+								?>
+									<input type="checkbox" class="custom-control-input" name="toggle" id="toggle_<?php echo $data->id; ?>" value="<?php echo $data->id; ?>" data-toggle="toggle" data-off="Disabled" data-on="Enabled" checked>
+									<?php
+								} ?>
+								<label class="custom-control-label" for="toggle_<?php echo $data->id; ?>">Activated</label>
+								</div>
 							</td>
 						</tr>
 					<?php endforeach ?>
@@ -55,3 +62,27 @@
 		</div>
 	</div>
 </div>
+<script src="<?= base_url() ?>assets/vendor/jquery/jquery.min.js"></script>
+<script>
+	$('input[name=toggle]').change(function() {
+		var mode = $(this).prop('checked');
+		var id = $(this).val();
+		$.ajax({
+			type: 'POST',
+			dataType: 'JSON',
+			url: '<?= site_url('organization/switchss') ?>',
+			data: {
+				mode: mode,
+				id: id
+			},
+			success: function(data) {
+				var data = eval(data);
+				message = data.message;
+				success = data.success;
+				$("#heading").html(success);
+				$("#body").html(message);
+				window.location = "<?= site_url('organization') ?>";
+			}
+		});
+	});
+</script>

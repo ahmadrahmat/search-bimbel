@@ -47,13 +47,15 @@ class Subject extends CI_Controller {
 			$subject = $query->row();
 			$query_subject_type = $this->subject_type_m->get();
 			$query_organization = $this->model_owner->get($id = null, $this->fungsi->user_login()->id);
-			$query_job_application = $this->job_application_m->getJobAppByOrganizationId($this->fungsi->user_login()->id);
+			$query_subject_tutor = $this->model_owner->getTutorBySubjectId($this->uri->segment(3));
+			$query_job_application = $this->job_application_m->getJobAppByOrganizationIdAndApproved($this->fungsi->user_login()->id);
 
             $data = array(
                 'page' => 'edit',
 				'row' => $subject,
 				'subject_type' => $query_subject_type,
 				'organization' => $query_organization,
+				'subject_tutor' => $query_subject_tutor,
 				'job_application' => $query_job_application
             );
             $this->template->load('template', 'subject/subject_form', $data);

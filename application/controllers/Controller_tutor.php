@@ -38,20 +38,36 @@ class Controller_tutor extends CI_Controller {
         $this->model_tutor->add($organization_id, $tutor_id);
 
         if($this->db->affected_rows() >0 ) {
-            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+            //$this->session->set_flashdata('success', 'Data berhasil disimpan');
+            echo "<script>
+				window.location='".site_url('bimbel_yang_sedang_terdaftar')."'
+				</script>";
         }
-        redirect('controller_tutor/semua_organisasi_detail/'.$organization_id);
+        //redirect('home/detail_bimbel/'.$organization_id);
+	}
+
+	public function process_daftar_kembail($id)
+    {
+        $this->model_tutor->reDaftar($id);
+
+        if($this->db->affected_rows() >0 ) {
+            //$this->session->set_flashdata('success', 'Data berhasil disimpan');
+            echo "<script>
+				window.location='".site_url('bimbel_yang_sedang_terdaftar')."'
+				</script>";
+        }
+        //redirect('home/detail_bimbel/'.$organization_id);
 	}
 	
 	public function bimbel_yang_sedang_terdaftar()
 	{
 		$data['row'] = $this->model_tutor->getJobApplicationByIdTutor($this->fungsi->user_login()->id);
-		$this->template->load('template', 'custom_tutor/bimbel_yang_sedang_terdaftar', $data);
+		$this->template->load('frontend/template', 'frontend/my-bimbel-tutor', $data);
 	}
 
 	public function bimbel_yang_sedang_diajar()
 	{
 		$data['row'] = $this->model_tutor->getSubjectByIdTutor($this->fungsi->user_login()->id);
-		$this->template->load('template', 'custom_tutor/bimbel_yang_sedang_diajar', $data);
+		$this->template->load('frontend/template', 'frontend/my-subject-tutor', $data);
 	}
 }

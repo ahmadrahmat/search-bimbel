@@ -63,7 +63,7 @@ class Controller_owner extends CI_Controller {
         if($query->num_rows() > 0) {
 			$enrollment = $query->row();
 			$query_student = $this->student_m->get();
-			$query_subject = $this->subject_m->get();
+			$query_subject = $this->subject_m->getSubjectByOrganizationId($id = null, $this->fungsi->user_login()->id);
 
             $data = array(
                 'page' => 'edit',
@@ -125,6 +125,19 @@ class Controller_owner extends CI_Controller {
         }
         redirect('subject_ongoing');
 	}
+
+	public function reject($id)
+	{
+		$params = array(
+			'status' => '3',
+        );
+        $this->db->where('id', $id);
+		$this->db->update('enrollment', $params);
+		if($this->db->affected_rows() >0 ) {
+            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+        }
+        redirect('subject_to_approve');
+	}
 	
 	//
 	public function subject_ongoing()
@@ -136,7 +149,7 @@ class Controller_owner extends CI_Controller {
 	//
 	public function history_subject()
 	{
-        $data['row'] = $this->model_owner->getEnrollmentByStatus2AndOrganizationId($this->fungsi->user_login()->id);
+        $data['row'] = $this->model_owner->getEnrollmentByStatus23AndOrganizationId($this->fungsi->user_login()->id);
 		$this->template->load('template', 'custom_owner/history_subject_data', $data);
 	}
 

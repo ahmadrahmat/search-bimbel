@@ -18,6 +18,15 @@ function check_not_login()
     }
 }
 
+function check_not_ts()
+{
+    $ci =& get_instance();
+    $user_sessions = $ci->session->userdata('bimbel_user_type_id');
+    if(($user_sessions == 3) OR ($user_sessions == 4)) {
+        redirect('home');
+    }
+}
+
 function check_admin()
 {
     $ci =& get_instance();
@@ -39,4 +48,13 @@ function indo_date($date)
 	$m = substr($date, 5, 2);
 	$y = substr($date, 0, 4);
 	return $d.'/'.$m.'/'.$y;
+}
+
+function get_bimbel_user_name($id)
+{
+	$ci = &get_instance();
+	$ci->load->model('bimbel_user_m');
+
+	$name = $ci->bimbel_user_m->get($id)->row()->name;
+	return $name;
 }

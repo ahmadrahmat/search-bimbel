@@ -13,9 +13,9 @@ Class Fungsi {
         $id = $this->ci->session->userdata('id');
         $user_data = $this->ci->bimbel_user_m->get($id)->row();
         return $user_data;
-	}
-	
-	function get_student_name($id)
+    }
+    
+    function get_student_name($id)
     {
 		$this->ci->load->model('bimbel_user_m');
 		

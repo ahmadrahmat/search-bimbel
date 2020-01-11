@@ -21,6 +21,7 @@
 	<!-- Custom styles for this template -->
 	<link href="<?= base_url() ?>assets/frontend/css/osahan.css" rel="stylesheet">
 	<link href="<?=base_url()?>assets/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet">
+	<link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 </head>
 
 <body>
@@ -39,26 +40,37 @@
 								HOME
 							</a>
 						</li>
-						<li class="nav-item dropdown">
+						<li class="nav-item dropdown
+						<?= $this->uri->segment(2) == 'latest' ? 'active' : '' ?>
+						">
 							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 								BIMBEL
 							</a>
 							<div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
-								<a class="dropdown-item" href="#">Populer</a>
-								<a class="dropdown-item" href="#">Baru</a>
+								<a class="dropdown-item 
+								<?= $this->uri->segment(2) == 'latest' ? 'active' : '' ?>
+								" href="<?php echo base_url(); ?>home/latest">Latest</a>
+								<a class="dropdown-item 
+								<?= $this->uri->segment(2) == 'popular' ? 'active' : '' ?>
+								" href="<?php echo base_url(); ?>home/popular">Popular</a>
 							</div>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<li class="nav-item 
+						<?= $this->uri->segment(2) == 'about' ? 'active' : '' ?>
+						">
+							<a class="nav-link" href="<?php echo base_url(); ?>home/about" id="navbarDropdownPortfolio" aria-haspopup="true" aria-expanded="false">
 								ABOUT
 							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						<li class="nav-item
+						<?= $this->uri->segment(2) == 'contact' ? 'active' : '' ?>
+						">
+							<a class="nav-link" href="<?php echo base_url(); ?>home/contact" id="navbarDropdownPortfolio" aria-haspopup="true" aria-expanded="false">
 								CONTACT US
 							</a>
 						</li>
-
+						
+						
 					</ul>
 					<div class="my-2 my-lg-0">
 						<ul class="list-inline main-nav-right">
@@ -69,12 +81,48 @@
 								<a class="dropdown-item" href="<?//= base_url() ?>auth/login" target="_blank">Owner</a>
 								</div>
 							</li> -->
+							<?php 
+							$ci =& get_instance();
+    						$user_session = $ci->session->userdata('id');
+    						if($user_session) { ?>
+								<?php if (($this->fungsi->user_login()->bimbel_user_type_id == 1) OR ($this->fungsi->user_login()->bimbel_user_type_id == 2)) : ?>
+								<li class="list-inline-item">
+									<a class="btn btn-link btn-sm" href="<?php echo base_url(); ?>dashboard"><strong><i class="mdi mdi-account"></i> <?= $this->fungsi->user_login()->name ?> (<?= $this->fungsi->user_login()->bimbel_user_type_name ?>)</strong></a>
+								</li>
+								<?php elseif (($this->fungsi->user_login()->bimbel_user_type_id == 3) OR ($this->fungsi->user_login()->bimbel_user_type_id == 4)) : ?>
+								<li class="list-inline-item">
+									<a class="btn btn-link btn-sm dropdown-toggle" href="#" id="navbarDropdownPortfolios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><strong><i class="mdi mdi-account"></i> <?= $this->fungsi->user_login()->name ?> (<?= $this->fungsi->user_login()->bimbel_user_type_name ?>)</strong></a>
+									<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 3) : ?>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
+									<a class="dropdown-item" href="<?= site_url('akun/editts/'.str_replace(array('=','+','/'), array('-','_','~'), $this->encryption->encrypt($user_session).'')) ?>">My Profile</a>
+									<a class="dropdown-item" href="<?= site_url('bimbel_yang_sedang_terdaftar') ?>">My Bimbel</a>
+									<!-- <a class="dropdown-item" href="<?//= site_url('bimbel_yang_sedang_diajar') ?>">My Subject</a> -->
+									</div>
+									<?php elseif ($this->fungsi->user_login()->bimbel_user_type_id == 4) : ?>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
+									<a class="dropdown-item" href="<?= site_url('akun/editts/'.str_replace(array('=','+','/'), array('-','_','~'), $this->encryption->encrypt($user_session).'')) ?>">My Profile</a>
+									<a class="dropdown-item" href="<?= site_url('bimbel_yang_di_ikuti') ?>">My Bimbel</a>
+									</div>
+									<?php endif ?>
+								</li>
+								
+								<li class="list-inline-item">
+									<a class="btn btn-success btn-sm" href="<?= base_url() ?>auth/logout">Sign Out</a>
+								</li>
+								<?php endif ?>
+							<?php } ?>
+
+							<?php 
+							$ci =& get_instance();
+    						$user_session = $ci->session->userdata('id');
+    						if(!$user_session) { ?>
 							<li class="list-inline-item">
-								<a class="btn btn-link btn-sm" href="<?= base_url() ?>auth/login" target="_blank">Sign In</a>
+								<a class="btn btn-link btn-sm" href="<?= base_url() ?>auth/login"><strong>Sign In</strong></a>
 							</li>
 							<li class="list-inline-item">
-								<a class="btn btn-success btn-sm" href="<?= base_url() ?>home/register">Sign Up</a>
+								<a class="btn btn-success btn-sm" href="<?= base_url() ?>auth/register">Sign Up</a>
 							</li>
+							<?php } ?>
 						</ul>
 					</div>
 				</div>
@@ -93,17 +141,17 @@
 			<div class="row">
 				<div class="col-lg-6 col-md-6">
 					<h4 class="mb-5 text-center"><a class="text-success logo" href="index.html"><i class="mdi mdi-home-map-marker"></i> <strong>Search</strong>Bimbel</a></h4>
-					<p class="text-center">Jakarta, Indonesia</p>
+					<p class="text-center">Gorontalo, Indonesia</p>
 					<p class="mb-0 text-center"><a class="text-light" href="#">+61 525 240 310</a></p>
-					<p class="mb-0 text-center"><a class="text-success" href="#">bimbel@gmail.com</a></p>
-					<p class="mb-0 text-center"><a class="text-info" href="#">www.askbootstrap.com</a></p>
+					<p class="mb-0 text-center"><a class="text-success" href="mailto:cbot59@gmail.com" target="_blank">cbot59@gmail.com</a></p>
+					<p class="mb-0 text-center"><a class="text-info" href="<?= base_url() ?>"><?= substr(base_url(),7,-1) ?></a></p>
 				</div>
 				<div class="col-lg-6 col-md-6">
 					<h6 class="mb-5 text-center text-success">GET IN TOUCH</h6>
 					<div class="footer-social text-center">
 						<a href="https://www.facebook.com/rivaldy.saputra" target="_blank"><i class="mdi mdi-facebook"></i></a>
 						<a href="https://instagram.com/rivaldi.dev" target="_blank"><i class="mdi mdi-instagram"></i></a>
-						<a href="#search"><i class="mdi mdi-linkedin"></i></a>
+						<a href="https://www.linkedin.com/in/cbot59/" target="_blank"><i class="mdi mdi-linkedin"></i></a>
 					</div>
 				</div>
 				<!-- <div class="col-lg-2 col-md-2">
@@ -136,7 +184,7 @@
 		<p class="mt-0 mb-0">© Copyright 2019 Search Bimbel. All Rights Reserved</p>
 		<small class="mt-0 mb-0">
 			Made with <i class="mdi mdi-heart text-danger"></i> by
-			<a class="text-dark" target="_blank" href="https://askbootstrap.com/">Ask Bootstrap</a>
+			<a class="text-dark" target="_blank" href="https://askbootstrap.com/">CV. Digitalks Cendana Solution</a>
 		</small>
 	</section>
 	<!-- End Copyright -->
@@ -150,6 +198,12 @@
 	<script src="<?= base_url() ?>assets/frontend/js/contact_me.js"></script>
 	<!-- select2 Js -->
 	<script src="<?= base_url() ?>assets/frontend/vendor/select2/js/select2.min.js"></script>
+	<!-- Page level plugins -->
+	<script src="<?= base_url() ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+	<!-- Page level custom scripts -->
+	<script src="<?= base_url() ?>assets/js/demo/datatables-demo.js"></script>
 	<!-- Custom -->
 	<script src="<?= base_url() ?>assets/frontend/js/custom.js"></script>
 	<script type="text/javascript">
@@ -189,6 +243,9 @@
 				source: "<?php echo site_url('home/autocomplete_organization/?'); ?>"
 			});
 		});
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
 	</script>
 </body>
 

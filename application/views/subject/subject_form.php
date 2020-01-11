@@ -14,9 +14,10 @@
 	</div>
 	<div class="card-body">
 		<form action="<?= site_url('subject/process') ?>" method="POST">
-			<div class="form-group">
-				<label>Nama <sup class="text-danger">*</sup></label>
-				<input type="hidden" name="id" value="<?= $row->id ?>">
+		<div class="form-group">
+			<label>Nama <sup class="text-danger">*</sup></label>
+			<input type="hidden" name="id" value="<?= $row->id ?>">
+			<input type="hidden" name="organization_id" value="<?= $organization->row()->id ?>">
 				<input type="text" name="name" value="<?= $row->name ?>" class="form-control" required>
 			</div>
 			<div class="form-group">
@@ -32,18 +33,14 @@
 					<?php endforeach; ?>
 				</select>
 			</div>
-			<div class="form-group">
-				<label>Organisasi <sup class="text-danger">*</sup></label>
-				<input type="hidden" name="organization_id" value="<?= $organization->row()->id ?>">
-				<input type="text" value="<?= $organization->row()->name ?>" class="form-control" required disabled>
-			</div>
 			<?php if($page == 'edit') : ?>
 			<div class="form-group">
 				<label>Tutor <sup class="text-danger">*</sup></label>
-				<select name="tutor_id" class="form-control">
-					<option value="">- Pilih -</option>
+				<select id="tutor_id" name="tutor_id[]" class="form-control" multiple>
+					
 					<?php foreach($job_application->result() as $key => $data) : ?>
-					<option value="<?=$data->tutor_id?>" <?=$data->tutor_id == $row->tutor_id ? "selected" : null?>><?=$data->bimbel_user_name?></option>
+						<option value="<?=$data->tutor_id?>" <?php foreach($subject_tutor->result() as $value => $val) : ?><?=$data->tutor_id == $val->tutor_id ? "selected" : null?><?php endforeach; ?>><?=$data->bimbel_user_name?></option>
+						
 					<?php endforeach; ?>
 				</select>
 			</div>

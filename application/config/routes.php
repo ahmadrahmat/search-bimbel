@@ -53,9 +53,15 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['profile'] = 'controller_profile';
+$route['profile_organization'] = 'controller_profile';
+$route['profile_organization_edit/(:num)'] = 'controller_profile/index/$1';
+
 $route['akun'] = 'bimbel_user/account';
 $route['akun/edit/(:num)'] = 'bimbel_user/account_edit/$1';
+$route['akun/editts/(:any)'] = 'bimbel_user/account_edit_ts/$1';
 $route['akun/process'] = 'bimbel_user/account_process';
+$route['akun/processts'] = 'bimbel_user/account_process_ts';
 //owner
 $route['subject_to_approve'] = 'controller_owner/subject_to_approve';
 $route['subject_to_approve_edit/(:num)'] = 'controller_owner/subject_to_approve_edit/$1';

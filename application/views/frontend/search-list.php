@@ -2,26 +2,8 @@
       <!-- Main Slider With Form -->
       <section class="osahan-slider">
          <div id="osahanslider" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-               <li data-target="#osahanslider" data-slide-to="0" class="active"></li>
-               <li data-target="#osahanslider" data-slide-to="1"></li>
-            </ol>
-            <div class="carousel-inner" role="listbox">
-               <div class="carousel-item active" style="background-image: url('<?= base_url() ?>assets/frontend/img/slider/2.jpg')">
-                  <div class="overlay"></div>
-               </div>
-               <div class="carousel-item" style="background-image: url('<?= base_url() ?>assets/frontend/img/slider/2.jpg')">
-                  <div class="overlay"></div>
-               </div>
-            </div>
-            <a class="carousel-control-prev" href="#osahanslider" role="button" data-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-            <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#osahanslider" role="button" data-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-            <span class="sr-only">Next</span>
-            </a>
+            <div class="carousel-item active" style="background-image: url('<?= base_url() ?>assets/frontend/img/slider/2.jpg')">
+            <div class="overlay"></div>
          </div>
          <div class="slider-form">
             <div class="container">
@@ -46,7 +28,7 @@
 									<select name="city" class="form-control select2 no-radius">
 										<option value="">Select City</option>
 										<?php foreach($city->result() as $key => $data) : ?>
-											<option value="<?= $data->name ?>"><?= $data->name ?></option>
+											<option value="<?= $data->id ?>"><?= $data->name ?> <?= ucfirst(strtolower($data->city_type)); ?></option>
 										<?php endforeach ?>
 									</select>
 								</div>
@@ -67,7 +49,7 @@
                <div class="col-lg-12 col-md-12">
                   <div class="osahan_top_filter row">
                      <div class="col-lg-6 col-md-6 tags-action">
-                        <span>Result :<!-- <a href="#"><i class="mdi mdi-window-close"></i></a> --></span>
+                        <span>Search Result :</span>
                         <!-- <span>Plot/Land <a href="#"><i class="mdi mdi-window-close"></i></a></span> -->
                      </div>
                   <!--   <div class="col-lg-6 col-md-6 sort-by-btn float-right">
@@ -89,26 +71,67 @@
                      </div>-->
 						</div> 
                   <div class="row">
-							<?php foreach($row->result() as $key => $data) : ?>
+							<?php if ($row->num_rows() == 0) { ?>
+                     <div class="col-lg-12 col-md-12">
+                        <h5>Kami tidak dapat menemukan hasil yang cocok dengan pencarian Anda.</h5>
+                     </div>
+                     <?php } else { ?>
+                     <?php foreach($row->result() as $key => $data) : ?>
                      <div class="col-lg-12 col-md-12">
                         <div class="card card-list card-list-view">
                            <a href="<?php echo base_url(); ?>home/detail_bimbel/<?= $data->organization_id ?>">
                               <div class="row no-gutters">
                                  <div class="col-lg-5 col-md-5">					 
-                                    <span class="badge badge-success"><?= $data->subject_type_name ?></span>
-                                    <img class="card-img-top" src="<?= base_url() ?>assets/frontend/img/list/1.png" alt="Card image cap">
+                                    <div id="carouselExampleIndicators<?php echo $data->organization_id; ?>" class="carousel slide" data-ride="carousel">
+                                       <div class="carousel-inner">
+                                          <?php 
+                                          $queryss = $this->db->query("SELECT organization_images.* FROM organization, organization_images WHERE organization.id=organization_images.organization_id AND organization.id=$data->organization_id");
+                                          $photos = $queryss->first_row();
+                                          $cek = $queryss->num_rows();
+                                          if ($cek != 0) {
+                                             foreach ($queryss->result() as $keys) { ?>
+                                                <?php if ($photos->image == $keys->image) { ?>
+                                                   <div class="carousel-item active">
+                                                   <img class="d-block w-100" src="<?= base_url() ?>assets/uploads/<?= $photos->image ?>"  style="height: 300px"></div>
+                                                <?php } else { ?>
+                                                   <div class="carousel-item">
+                                                   <img class="d-block w-100" src="<?= base_url() ?>assets/uploads/<?= $keys->image ?>" style="height: 300px"></div>
+                                                <?php } ?>
+                                             <?php } ?>
+                                          <?php } else { ?>
+                                          <div class="carousel-item active">
+                                          <img class="d-block w-100" src="<?= base_url() ?>assets/frontend/images/no_image.jpg" style="height: 300px"></div>
+                                          <?php } ?>
+                                       </div>
+                                       <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators<?php //echo $data->organization_id; ?>" role="button" data-slide="prev">
+                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                          <span class="sr-only">Previous</span>
+                                       </a>
+                                       <a class="carousel-control-next" href="#carouselExampleIndicators<?php //echo $data->organization_id; ?>" role="button" data-slide="next">
+                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                          <span class="sr-only">Next</span>
+                                       </a> -->
+                                    </div>
                                  </div>
                                  <div class="col-lg-7 col-md-7">
                                     <div class="card-body">
                                        <h5 class="card-title"><?= $data->organization_name ?></h5>
                                        <h6 class="card-subtitle mb-2 text-muted"><i class="mdi mdi-home-map-marker"></i> <?= $data->address ?></h6>
+                                       <h6 class="card-subtitle mb-2 text-muted"><i class="mdi mdi-city"></i> <?= $data->city_name ?> <?= ucfirst(strtolower($data->city_type)); ?></h6>
                                        <h2 class="text-success mb-0 mt-3">
 														Rp. <?= number_format($data->payment,2,',','.'); ?> <small>/subject</small>
                                        </h2>
                                     </div>
                                     <div class="card-footer">
                                        <span><i class="mdi mdi-phone"></i> Contact : <strong><?= $data->phone ?></strong></span>
-                                       <span><i class="mdi mdi-book"></i> Subjects : <strong>5</strong></span>
+                                       <span><i class="mdi mdi-book"></i> Subjects : <strong>
+                                       <?php 
+                                       $count_subject = $this->db->query("SELECT COUNT(id) as subject FROM `subject` WHERE organization_id=$data->organization_id");
+                                       foreach ($count_subject->result() as $k) {
+                                          echo $k->subject;
+                                       }
+                                       ?>
+                                       </strong></span>
                                     </div>
                                  </div>
                               </div>
@@ -116,6 +139,7 @@
                         </div>
 							</div>
 							<?php endforeach ?>
+                     <?php } ?>
                   </div>
                   <nav class="mt-5">
                      <ul class="pagination justify-content-center">

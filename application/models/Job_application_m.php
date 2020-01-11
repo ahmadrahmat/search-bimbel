@@ -30,6 +30,22 @@ class Job_application_m extends CI_Model {
         }
         $query = $this->db->get();
         return $query;
+	}
+	
+    public function getJobAppByOrganizationIdAndApproved($id = null)
+    {
+		$this->db->select('job_application.*, organization.name as organization_name, tutor.bimbel_user_id, bimbel_user.name as bimbel_user_name');
+        $this->db->from('job_application');
+        $this->db->join('organization', 'organization.id = job_application.organization_id');
+        $this->db->join('owner', 'owner.id = organization.owner_id');
+        $this->db->join('tutor', 'tutor.id = job_application.tutor_id');
+        $this->db->join('bimbel_user', 'bimbel_user.id = tutor.bimbel_user_id');
+		$this->db->where('job_application.approved', 1);
+        if($id != null) {
+            $this->db->where('owner.bimbel_user_id', $id);
+        }
+        $query = $this->db->get();
+        return $query;
     }
 
     public function add($post)

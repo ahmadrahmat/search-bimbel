@@ -85,12 +85,38 @@ class Job_application extends CI_Controller {
         redirect('job_application');
 	}
 
+	public function inactive($id)
+	{
+		$params = array(
+			'approved' => '2',
+        );
+        $this->db->where('id', $id);
+		$this->db->update('job_application', $params);
+		if($this->db->affected_rows() >0 ) {
+            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+        }
+        redirect('job_application');
+	}
+
+	public function rejected($id)
+	{
+		$params = array(
+			'approved' => '3',
+        );
+        $this->db->where('id', $id);
+		$this->db->update('job_application', $params);
+		if($this->db->affected_rows() >0 ) {
+            $this->session->set_flashdata('success', 'Data berhasil disimpan');
+        }
+        redirect('job_application');
+	}
+
     public function delete($id)
     {
         $this->job_application_m->delete($id);
         if($this->db->affected_rows() > 0) {
             echo "<script>alert('Data berhasil dihapus');</script>";
         }
-        echo "<script>window.location='".site_url('job_application')."';</script>";
+        echo "<script>window.location='".site_url('bimbel_yang_sedang_terdaftar')."';</script>";
     }
 }

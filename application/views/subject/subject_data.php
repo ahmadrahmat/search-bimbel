@@ -37,14 +37,24 @@
 							<td><?= $data->description ?></td>
 							<td><?= $data->subject_type_name ?></td>
 							<td><?= $data->organization_name ?></td>
-							<td><?= $data->tutor_id != 0 || $data->tutor_id != null ? $this->fungsi->get_tutor_name($data->tutor_id)->name : '' ?></td>
+							<td>
+								<?php
+								$num = 1;
+								$query = $this->db->query("SELECT * FROM subject_tutor WHERE subject_id = $data->id");
+								foreach ($query->result() as $value => $val) :
+								?>
+									<?= $val->tutor_id != 0 || $val->tutor_id != null ? $num++ . '. ' . $this->fungsi->get_tutor_name($val->tutor_id)->name . '<br>' : '' ?>
+								<?php endforeach ?>
+							</td>
 							<td class="text-center" style="width: 25%">
 								<a href="<?= site_url('subject/edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
 									<i class="fa fa-pen"></i> Update
 								</a>
-								<a href="<?= site_url('subject/delete/' . $data->id) ?>" onclick="return confirm('Yakin hapus data ini?');" class="btn btn-sm btn-danger">
-									<i class="fa fa-trash"></i> Delete
-								</a>
+								<?php if ($query->num_rows() == 0) : ?>
+									<a href="<?= site_url('subject/delete/' . $data->id) ?>" onclick="return confirm('Yakin hapus data ini?');" class="btn btn-sm btn-danger">
+										<i class="fa fa-trash"></i> Delete
+									</a>
+								<?php endif ?>
 							</td>
 						</tr>
 					<?php endforeach ?>
