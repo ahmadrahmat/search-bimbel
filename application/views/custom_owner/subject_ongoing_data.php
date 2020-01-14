@@ -42,7 +42,7 @@
 								<!-- <a href="#!" class="btn btn-sm btn-info">
 									<i class="fa fa-eye"></i> Detail
 								</a> -->
-								<a href="<?= site_url('controller_owner/subject_to_approve_edit/' . $data->id) ?>"  class="btn btn-sm btn-primary">
+								<a href="<?= site_url('controller_owner/subject_to_approve_edit/' . $data->id) ?>" onclick="return confirm('Update data ini?');" class="btn btn-sm btn-primary">
 									<i class="fa fa-pen"></i> Update
 								</a>
 							</td>

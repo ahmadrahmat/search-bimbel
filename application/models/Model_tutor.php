@@ -5,14 +5,23 @@ class Model_tutor extends CI_Model {
 
 	//custom function model tutor
 
-	public function add($id, $tutor_id)
+	// public function add($id, $tutor_id)
+    // {
+    //     $params = array(
+	// 		'organization_id' => $id,
+	// 		'tutor_id' => $tutor_id
+    //     );
+    //     $this->db->insert('job_application', $params);
+	// }
+
+	public function add($post)
     {
         $params = array(
-			'organization_id' => $id,
-			'tutor_id' => $tutor_id
+			'organization_id' => $post['organization_id'],
+			'tutor_id'        => $post['tutor_id']
         );
         $this->db->insert('job_application', $params);
-	}
+    }
 
 	public function reDaftar($id)
 	{
@@ -74,6 +83,7 @@ class Model_tutor extends CI_Model {
 		if($id != null) {
 			$this->db->where('tutor.bimbel_user_id', $id);
 		}
+		$this->db->order_by('job_application.approved', 'ASC');
 		$query = $this->db->get();
 		return $query;
 	}

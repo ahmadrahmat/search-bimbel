@@ -44,38 +44,41 @@
 						<tr>
 							<td style="width: 5%"><?= $no++ ?></td>
 							<td>
-								<?php if($data->approved == 0) {
+								<?php if ($data->approved == 0) {
 									echo '<label><i class="badge badge-warning">Waiting</i></label>';
-								} elseif($data->approved == 1) {
+								} elseif ($data->approved == 1) {
 									echo '<label><i class="badge badge-success">Approved</i></label>';
-								} elseif($data->approved == 2) {
+								} elseif ($data->approved == 2) {
 									echo '<label><i class="badge badge-warning">Inactive</i></label>';
-								} elseif($data->approved == 3) {
+								} elseif ($data->approved == 3) {
 									echo '<label><i class="badge badge-danger">Rejected</i></label>';
 								} ?>
 							</td>
 							<td><?= $data->organization_name ?></td>
 							<td><?= $data->bimbel_user_name ?></td>
 							<td class="text-center" style="width: 25%">
-								<?php if($data->approved == 0) { ?>
-									<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approved tutor ini?')">
-										<i class="fa fa-check"></i> Approve
-									</a>
-									<a href="<?= site_url('job_application/rejected/' . $data->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Reject tutor ini?')">
-										<i class="fa fa-ban"></i> Reject
-									</a>
-								<?php } if($data->approved == 1) { ?>
-									<a href="<?= site_url('job_application/inactive/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Inactive tutor ini?')">
+								<?php if ($data->approved == 0) { ?>
+									<button type="button" class="btn btn-sm btn-success" data-target="#approved<?= $data->id ?>" data-toggle="modal">
+										<i class="fa fa-exclamation"></i> Approve
+									</button>
+									<button type="button" class="btn btn-sm btn-success" data-target="#rejected<?= $data->id ?>" data-toggle="modal">
+										<i class="fa fa-exclamation"></i> Reject
+									</button>
+								<?php }
+								if ($data->approved == 1) { ?>
+									<button type="button" class="btn btn-sm btn-warning" data-target="#inactive<?= $data->id ?>" data-toggle="modal">
 										<i class="fa fa-exclamation"></i> Inactive
-									</a>
-								<?php } if($data->approved == 2) { ?>
-									<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approved tutor ini?')">
-										<i class="fa fa-check"></i> Active
-									</a>
-								<?php } if($data->approved == 3) { ?>
-									
+									</button>
+								<?php }
+								if ($data->approved == 2) { ?>
+									<button type="button" class="btn btn-sm btn-success" data-target="#active<?= $data->id ?>" data-toggle="modal">
+										<i class="fa fa-exclamation"></i> Active
+									</button>
+								<?php }
+								if ($data->approved == 3) { ?>
+
 								<?php } ?>
-								
+
 								<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 3) : ?>
 									<a href="<?= site_url('job_application/edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
 										<i class="fa fa-pen"></i> Update
@@ -86,6 +89,66 @@
 								<?php endif ?>
 							</td>
 						</tr>
+						<div class="modal fade" id="approved<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Approve tutor ini?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-footer">
+										<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success">Approve</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="active<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Active tutor ini?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-footer">
+										<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success">Active</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="rejected<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Reject tutor ini?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-footer">
+									<a href="<?= site_url('job_application/rejected/' . $data->id) ?>" class="btn btn-sm btn-danger">Reject</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="inactive<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Inactive tutor ini?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-footer">
+										<a href="<?= site_url('job_application/inactive/' . $data->id . '/' . $data->tutor_id) ?>" class="btn btn-sm btn-warning">Inactive</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					<?php endforeach ?>
 				</tbody>
 			</table>

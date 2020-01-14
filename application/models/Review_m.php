@@ -5,8 +5,9 @@ class Review_m extends CI_Model {
 
     public function getReview($id)
     {
-		$this->db->select('review.*, bimbel_user.name as bimbel_user_name');
+		$this->db->select('review.*, bimbel_user.name as bimbel_user_name, enrollment.end_date as end_date');
         $this->db->from('review');
+        $this->db->join('enrollment', 'enrollment.id = review.id_subject');
         $this->db->join('bimbel_user', 'bimbel_user.id = review.id_student');
         $this->db->join('organization', 'organization.id = review.id_organization');
         $this->db->where('review.id_organization', $id);

@@ -106,17 +106,19 @@ class Bimbel_user extends CI_Controller {
 		$this->template->load('template', 'bimbel_user/account_data', $data);
 	}
 
-	public function account_edit_ts($id)
+	//public function account_edit_ts($id)
+	public function account_edit_ts()
     {
-        $ms = str_replace(array('-','_','~'), array('=','+','/'), $id.'');
+        //$ms = str_replace(array('-','_','~'), array('=','+','/'), $id.'');
         // print_r($ms);
         // $msg = $id; //Plain text 
         // print_r($msg);
         //$key = 'recodeku.blospot.com123456789123'; //Key 32 character 
         // //default menggunakan MCRYPT_RIJNDAEL_256 
-        $hasil_dekripsi = $this->encryption->decrypt($ms); 
+        //$hasil_dekripsi = $this->encryption->decrypt($ms); 
         // print_r($hasil_dekripsi);
-        $query = $this->bimbel_user_m->get($hasil_dekripsi);
+        $id = $this->fungsi->user_login()->id;
+        $query = $this->bimbel_user_m->get($id);
         if($query->num_rows() > 0) {
 			$bimbel_user = $query->row();
 			$query_city = $this->city_m->get();
@@ -169,7 +171,7 @@ class Bimbel_user extends CI_Controller {
             //$this->session->set_flashdata('success', 'Data berhasil disimpan');
             echo "<script>
 				alert('Data berhasil disimpan');
-				window.location='".site_url('akun/editts/'.$id.'')."'
+				window.location='".site_url('akun/editts')."'
 				</script>";
         }
         //redirect('akun');

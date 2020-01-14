@@ -33,17 +33,36 @@ class Controller_tutor extends CI_Controller {
 		$this->template->load('template', 'custom_tutor/semua_organisasi_detail', $data);
 	}
 
-	public function process_daftar_organisasi($organization_id, $tutor_id)
+	// public function process_daftar_organisasi($organization_id, $tutor_id)
+	public function process_daftar_organisasi()
     {
-        $this->model_tutor->add($organization_id, $tutor_id);
+		
+		// $this->model_tutor->add($organization_id, $tutor_id);
 
-        if($this->db->affected_rows() >0 ) {
-            //$this->session->set_flashdata('success', 'Data berhasil disimpan');
-            echo "<script>
+        // if($this->db->affected_rows() >0 ) {
+        //     //$this->session->set_flashdata('success', 'Data berhasil disimpan');
+        //     echo "<script>
+		// 		window.location='".site_url('bimbel_yang_sedang_terdaftar')."'
+		// 		</script>";
+        // }
+		//redirect('home/detail_bimbel/'.$organization_id);
+		
+		if(isset($_POST['add'])) {
+			$post = array(
+				'organization_id'     => $this->input->post('organization_id', true),
+				'tutor_id'       => $this->input->post('tutor_id', true)
+			);
+			$this->model_tutor->add($post);
+			//print_r($post);
+			if($this->db->affected_rows() >0 ) {
+			//	$this->session->set_flashdata('success', 'Registration successful. Please login using your username and password!');
+				echo "<script>
+				alert('Data berhasil disimpan');
 				window.location='".site_url('bimbel_yang_sedang_terdaftar')."'
 				</script>";
-        }
-        //redirect('home/detail_bimbel/'.$organization_id);
+			}
+			//redirect('auth/login');
+		} 
 	}
 
 	public function process_daftar_kembail($id)

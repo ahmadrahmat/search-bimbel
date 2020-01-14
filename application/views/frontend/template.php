@@ -22,6 +22,9 @@
 	<link href="<?= base_url() ?>assets/frontend/css/osahan.css" rel="stylesheet">
 	<link href="<?=base_url()?>assets/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet">
 	<link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="<?= base_url() ?>assets/summernote/summernote-bs4.css">
+	<!-- Toastr -->
+	<link rel="stylesheet" href="<?= base_url() ?>assets/frontend/toastr/toastr.min.css">
 </head>
 
 <body>
@@ -65,7 +68,7 @@
 						<li class="nav-item
 						<?= $this->uri->segment(2) == 'contact' ? 'active' : '' ?>
 						">
-							<a class="nav-link" href="<?php echo base_url(); ?>home/contact" id="navbarDropdownPortfolio" aria-haspopup="true" aria-expanded="false">
+							<a class="nav-link" href="<?php echo base_url(); ?>home/contactus" id="navbarDropdownPortfolio" aria-haspopup="true" aria-expanded="false">
 								CONTACT US
 							</a>
 						</li>
@@ -83,25 +86,40 @@
 							</li> -->
 							<?php 
 							$ci =& get_instance();
-    						$user_session = $ci->session->userdata('id');
+							$user_session = $ci->session->userdata('id');
     						if($user_session) { ?>
 								<?php if (($this->fungsi->user_login()->bimbel_user_type_id == 1) OR ($this->fungsi->user_login()->bimbel_user_type_id == 2)) : ?>
 								<li class="list-inline-item">
 									<a class="btn btn-link btn-sm" href="<?php echo base_url(); ?>dashboard"><strong><i class="mdi mdi-account"></i> <?= $this->fungsi->user_login()->name ?> (<?= $this->fungsi->user_login()->bimbel_user_type_name ?>)</strong></a>
 								</li>
 								<?php elseif (($this->fungsi->user_login()->bimbel_user_type_id == 3) OR ($this->fungsi->user_login()->bimbel_user_type_id == 4)) : ?>
+									<?php
+									$send_to = $this->fungsi->user_login()->id;
+									$sql = $this->db->query("SELECT count(status) as notif FROM email WHERE send_to = $send_to AND status = '0'");
+									?>
 								<li class="list-inline-item">
 									<a class="btn btn-link btn-sm dropdown-toggle" href="#" id="navbarDropdownPortfolios" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><strong><i class="mdi mdi-account"></i> <?= $this->fungsi->user_login()->name ?> (<?= $this->fungsi->user_login()->bimbel_user_type_name ?>)</strong></a>
 									<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 3) : ?>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
-									<a class="dropdown-item" href="<?= site_url('akun/editts/'.str_replace(array('=','+','/'), array('-','_','~'), $this->encryption->encrypt($user_session).'')) ?>">My Profile</a>
+									<!-- <a class="dropdown-item" href="<?//= site_url('akun/editts/'.str_replace(array('=','+','/'), array('-','_','~'), $this->encryption->encrypt($user_session).'')) ?>">My Profile</a> -->
+									<a class="dropdown-item" href="<?= site_url('akun/editts') ?>">My Profile</a>
 									<a class="dropdown-item" href="<?= site_url('bimbel_yang_sedang_terdaftar') ?>">My Bimbel</a>
+									<a class="dropdown-item" href="<?= site_url('home/email') ?>">My Mail 
+									<?php if ($sql->row()->notif != '0') : ?>
+										<span class="badge badge-danger badge-counter"><?= $sql->row()->notif ?>+</span>
+									<?php endif ?>
+									</a>
 									<!-- <a class="dropdown-item" href="<?//= site_url('bimbel_yang_sedang_diajar') ?>">My Subject</a> -->
 									</div>
 									<?php elseif ($this->fungsi->user_login()->bimbel_user_type_id == 4) : ?>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
-									<a class="dropdown-item" href="<?= site_url('akun/editts/'.str_replace(array('=','+','/'), array('-','_','~'), $this->encryption->encrypt($user_session).'')) ?>">My Profile</a>
+									<a class="dropdown-item" href="<?= site_url('akun/editts') ?>">My Profile</a>
 									<a class="dropdown-item" href="<?= site_url('bimbel_yang_di_ikuti') ?>">My Bimbel</a>
+									<a class="dropdown-item" href="<?= site_url('home/email') ?>">My Mail 
+									<?php if ($sql->row()->notif != '0') : ?>
+										<span class="badge badge-danger badge-counter"><?= $sql->row()->notif ?>+</span>
+									<?php endif ?>
+									</a>
 									</div>
 									<?php endif ?>
 								</li>
@@ -201,7 +219,9 @@
 	<!-- Page level plugins -->
 	<script src="<?= base_url() ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+	<script src="<?= base_url() ?>assets/summernote/summernote-bs4.min.js"></script>
+	<!-- Toastr -->
+	<script src="<?= base_url() ?>assets/frontend/toastr/toastr.min.js"></script>
 	<!-- Page level custom scripts -->
 	<script src="<?= base_url() ?>assets/js/demo/datatables-demo.js"></script>
 	<!-- Custom -->
@@ -246,6 +266,24 @@
 		$(function () {
 			$('[data-toggle="tooltip"]').tooltip()
 		})
+		$(function() {
+			//Add text editor
+			$('#compose-textarea').summernote({
+				height: 300
+			})
+		})
+		$('.toastrDefaultSuccess').click(function() {
+			toastr.success('Link copied to clipboard')
+		});
+		$('.toastrDefaultInfo').click(function() {
+			toastr.info('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+		});
+		$('.toastrDefaultError').click(function() {
+			toastr.error('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+		});
+		$('.toastrDefaultWarning').click(function() {
+			toastr.warning('Lorem ipsum dolor sit amet, consetetur sadipscing elitr.')
+		});
 	</script>
 </body>
 

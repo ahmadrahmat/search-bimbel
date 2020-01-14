@@ -50,7 +50,7 @@ class Model_owner extends CI_Model
 		$this->db->from('subject');
 		$this->db->join('subject_tutor', 'subject.id = subject_tutor.subject_id');
 		$this->db->join('job_application', 'job_application.tutor_id = subject_tutor.tutor_id');
-		$this->db->where('job_application.approved', '1');
+		// $this->db->where('job_application.approved', '1');
 		$sql = $this->db->get()->result();
 
 		foreach ($sql as $key) {
@@ -65,9 +65,9 @@ class Model_owner extends CI_Model
 		$this->db->join('organization', 'organization.id = subject.organization_id');
 		$this->db->join('owner', 'owner.id = organization.owner_id');
 		$this->db->join('bimbel_user', 'bimbel_user.id = owner.bimbel_user_id');
-		$this->db->where_in('subject.id', $subject_id);
+		// $this->db->where_in('subject.id', $subject_id);
 		$this->db->where('bimbel_user.id', $id);
-		$this->db->where('enrollment.status', 1);
+		$this->db->where('enrollment.status', 0);
 
 		$query = $this->db->get();
 		return $query;

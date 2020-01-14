@@ -50,6 +50,26 @@ function indo_date($date)
 	return $d.'/'.$m.'/'.$y;
 }
 
+function tgl_ind($date)
+{
+
+	// array hari dan bulan
+	$Hari = array("Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu");
+	$Bulan = array(
+		"Januari", "Februari", "Maret", "April", "Mei", "Juni",
+		"Juli", "Agustus", "September", "Oktober", "November", "Desember"
+	);
+
+	// pemisahan tahun, bulan, hari, dan waktu
+	$tahun = substr($date, 0, 4);
+	$bulan = substr($date, 5, 2);
+	$tgl = substr($date, 8, 2);
+	$waktu = substr($date, 11, 5);
+	$hari = date("w", strtotime($date));
+	$result = $tgl . " " . $Bulan[(int) $bulan - 1] . " " . $tahun . "";
+	return $result;
+}
+
 function get_bimbel_user_name($id)
 {
 	$ci = &get_instance();
@@ -57,4 +77,28 @@ function get_bimbel_user_name($id)
 
 	$name = $ci->bimbel_user_m->get($id)->row()->name;
 	return $name;
+}
+
+function timeAgo($timestamp)
+{
+	$time = time() - $timestamp;
+
+	if ($time < 60)
+		return ($time > 1) ? $time . ' seconds' : 'a second';
+	elseif ($time < 3600) {
+		$tmp = floor($time / 60);
+		return ($tmp > 1) ? $tmp . ' minutes' : ' a minute';
+	} elseif ($time < 86400) {
+		$tmp = floor($time / 3600);
+		return ($tmp > 1) ? $tmp . ' hours' : ' a hour';
+	} elseif ($time < 2592000) {
+		$tmp = floor($time / 86400);
+		return ($tmp > 1) ? $tmp . ' days' : ' a day';
+	} elseif ($time < 946080000) {
+		$tmp = floor($time / 2592000);
+		return ($tmp > 1) ? $tmp . ' months' : ' a month';
+	} else {
+		$tmp = floor($time / 946080000);
+		return ($tmp > 1) ? $tmp . ' years' : ' a year';
+	}
 }

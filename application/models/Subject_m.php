@@ -54,6 +54,9 @@ class Subject_m extends CI_Model {
                 $data['subject_id'] = $post['id'];
                 $this->db->insert('subject_tutor', $data);
             }
+		} else {
+			$this->db->where('subject_id', $post['id']);
+            $this->db->delete('subject_tutor');
 		}
 		
         $params = array(

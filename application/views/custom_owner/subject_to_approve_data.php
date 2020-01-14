@@ -17,7 +17,7 @@
 						<th>No.</th>
 						<th>Action</th>
 						<th>Subject Type</th>
-						<th>Subject</th>
+						<th data-toggle="tooltip" title="click subject’s name to edit subject">Subject</th>
 						<th>Student</th>
 						<th>Tutor</th>
 						<th>Tgl. Mulai</th>
@@ -34,11 +34,23 @@
 						<tr>
 							<td style="width: 5%"><?= $no++ ?></td>
 							<td>
-								
-									<a href="<?= site_url('controller_owner/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approve data ini?')">
-										<i class="fa fa-check"></i> Approve
-									</a>
-								
+								<?php if ($data->status == 0) : ?>
+									<?php
+									$this->db->select('subject.id as subject_id');
+									$this->db->from('subject');
+									$this->db->join('subject_tutor', 'subject.id = subject_tutor.subject_id');
+									$this->db->join('job_application', 'job_application.tutor_id = subject_tutor.tutor_id');
+									$this->db->where('job_application.approved', '1');
+									$this->db->where('subject.id', $data->subject_id);
+
+									$sql = $this->db->get()->num_rows();
+									if ($sql > 0) :
+									?>
+										<a href="<?= site_url('controller_owner/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approve data ini?')">
+											<i class="fa fa-check"></i> Approve
+										</a>
+									<?php endif ?>
+								<?php endif ?>
 								<!-- <a href="#!" class="btn btn-sm btn-info">
 									<i class="fa fa-eye"></i> Detail
 								</a> -->
@@ -46,22 +58,22 @@
 									<i class="fa fa-pen"></i> Update
 								</a>
 								<a href="<?= site_url('controller_owner/reject/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Reject data ini?')">
-										<i class="fa fa-ban"></i> Reject
-									</a>
+									<i class="fa fa-ban"></i> Reject
+								</a>
 								<!-- <a href="<?= site_url('controller_owner/subject_to_approve_delete/' . $data->id) ?>" onclick="return confirm('Yakin hapus data ini?');" class="btn btn-sm btn-danger">
 									<i class="fa fa-trash"></i> Delete
 								</a> -->
 							</td>
 							<td><?= $data->subject_type_name ?></td>
-							<td><?= $data->subject_name ?></td>
+							<td><a href="<?= site_url('subject/edit/' . $data->subject_id) ?>"><?= $data->subject_name ?></a></td>
 							<td><?= $this->fungsi->get_student_name($data->student_id)->name ?></td>
 							<td>
-								<?php 
-									$num = 1;
-									$query = $this->db->query("SELECT * FROM subject_tutor WHERE subject_id = $data->subject_id");
-									foreach ($query->result() as $value => $val) : 
+								<?php
+								$num = 1;
+								$query = $this->db->query("SELECT * FROM subject_tutor WHERE subject_id = $data->subject_id");
+								foreach ($query->result() as $value => $val) :
 								?>
-								<?= $val->tutor_id != 0 || $val->tutor_id != null ? $num++.'.'. $this->fungsi->get_tutor_name($val->tutor_id)->name : '' ?>
+									<?= $val->tutor_id != 0 || $val->tutor_id != null ? $num++ . '.' . $this->fungsi->get_tutor_name($val->tutor_id)->name : '' ?>
 								<?php endforeach ?>
 							</td>
 							<td><?= $data->start_date ?></td>

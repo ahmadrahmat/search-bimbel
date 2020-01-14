@@ -85,13 +85,16 @@ class Job_application extends CI_Controller {
         redirect('job_application');
 	}
 
-	public function inactive($id)
+	public function inactive($id, $tutor_id)
 	{
 		$params = array(
 			'approved' => '2',
         );
         $this->db->where('id', $id);
 		$this->db->update('job_application', $params);
+		
+		$this->db->where('tutor_id', $tutor_id);
+        $this->db->delete('subject_tutor');
 		if($this->db->affected_rows() >0 ) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
