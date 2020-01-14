@@ -44,6 +44,7 @@
 						<tr>
 							<td style="width: 5%"><?= $no++ ?></td>
 							<td>
+<<<<<<< HEAD
 								<?php if ($data->approved == 0) {
 									echo '<label><i class="badge badge-warning">Waiting</i></label>';
 								} elseif ($data->approved == 1) {
@@ -51,12 +52,22 @@
 								} elseif ($data->approved == 2) {
 									echo '<label><i class="badge badge-warning">Inactive</i></label>';
 								} elseif ($data->approved == 3) {
+=======
+								<?php if($data->approved == 0) {
+									echo '<label><i class="badge badge-warning">Waiting</i></label>';
+								} elseif($data->approved == 1) {
+									echo '<label><i class="badge badge-success">Approved</i></label>';
+								} elseif($data->approved == 2) {
+									echo '<label><i class="badge badge-warning">Inactive</i></label>';
+								} elseif($data->approved == 3) {
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 									echo '<label><i class="badge badge-danger">Rejected</i></label>';
 								} ?>
 							</td>
 							<td><?= $data->organization_name ?></td>
 							<td><?= $data->bimbel_user_name ?></td>
 							<td class="text-center" style="width: 25%">
+<<<<<<< HEAD
 								<?php if ($data->approved == 0) { ?>
 									<button type="button" class="btn btn-sm btn-success" data-target="#approved<?= $data->id ?>" data-toggle="modal">
 										<i class="fa fa-exclamation"></i> Approve
@@ -79,6 +90,44 @@
 
 								<?php } ?>
 
+=======
+								<?php if($data->approved == 0) { ?>
+									<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approved tutor ini?')">
+										<i class="fa fa-check"></i> Approve
+									</a>
+									<a href="<?= site_url('job_application/inactive/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Inactive tutor ini?')">
+										<i class="fa fa-exclamation"></i> Inactive
+									</a>
+									<a href="<?= site_url('job_application/rejected/' . $data->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Reject tutor ini?')">
+										<i class="fa fa-ban"></i> Reject
+									</a>
+								<?php } if($data->approved == 1) { ?>
+									<a href="<?= site_url('job_application/inactive/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Inactive tutor ini?')">
+										<i class="fa fa-exclamation"></i> Inactive
+									</a>
+									<a href="<?= site_url('job_application/rejected/' . $data->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Reject tutor ini?')">
+										<i class="fa fa-ban"></i> Reject
+									</a>
+								<?php } if($data->approved == 2) { ?>
+									<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approved tutor ini?')">
+										<i class="fa fa-check"></i> Approve
+									</a>
+									<a href="<?= site_url('job_application/rejected/' . $data->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Reject tutor ini?')">
+										<i class="fa fa-ban"></i> Reject
+									</a>
+								<?php } if($data->approved == 3) { ?>
+									<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approved tutor ini?')">
+										<i class="fa fa-check"></i> Approve
+									</a>
+									<a href="<?= site_url('job_application/inactive/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Inactive tutor ini?')">
+										<i class="fa fa-exclamation"></i> Inactive
+									</a>
+								<?php } ?>
+								
+								
+								
+								
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 								<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 3) : ?>
 									<a href="<?= site_url('job_application/edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
 										<i class="fa fa-pen"></i> Update

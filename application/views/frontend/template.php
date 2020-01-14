@@ -22,9 +22,12 @@
 	<link href="<?= base_url() ?>assets/frontend/css/osahan.css" rel="stylesheet">
 	<link href="<?=base_url()?>assets/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet">
 	<link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+<<<<<<< HEAD
 	<link rel="stylesheet" href="<?= base_url() ?>assets/summernote/summernote-bs4.css">
 	<!-- Toastr -->
 	<link rel="stylesheet" href="<?= base_url() ?>assets/frontend/toastr/toastr.min.css">
+=======
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 </head>
 
 <body>
@@ -68,11 +71,49 @@
 						<li class="nav-item
 						<?= $this->uri->segment(2) == 'contact' ? 'active' : '' ?>
 						">
+<<<<<<< HEAD
 							<a class="nav-link" href="<?php echo base_url(); ?>home/contactus" id="navbarDropdownPortfolio" aria-haspopup="true" aria-expanded="false">
 								CONTACT US
 							</a>
 						</li>
 						
+=======
+							<a class="nav-link" href="<?php echo base_url(); ?>home/contact" id="navbarDropdownPortfolio" aria-haspopup="true" aria-expanded="false">
+								CONTACT US
+							</a>
+						</li>
+						<?php 
+							$ci =& get_instance();
+    						$user_session = $ci->session->userdata('id');
+    						if($user_session) { ?>
+								<?php if (($this->fungsi->user_login()->bimbel_user_type_id == 1) OR ($this->fungsi->user_login()->bimbel_user_type_id == 2)) : ?>
+								
+								<?php elseif ($this->fungsi->user_login()->bimbel_user_type_id == 3) : ?>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									My Account
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
+									<a class="dropdown-item" href="<?= site_url('akun/editts/' . $user_session) ?>">My Profile</a>
+									<a class="dropdown-item" href="<?= site_url('bimbel_yang_sedang_terdaftar') ?>">My Bimbel</a>
+									<a class="dropdown-item" href="<?= site_url('bimbel_yang_sedang_diajar') ?>">My Subject</a>
+									</div>
+								</li>
+								
+								<?php elseif ($this->fungsi->user_login()->bimbel_user_type_id == 4) : ?>
+								<li class="nav-item dropdown">
+									<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPortfolio" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									My Account
+									</a>
+									<div class="dropdown-menu" aria-labelledby="navbarDropdownPortfolio">
+									<a class="dropdown-item" href="<?= site_url('akun/editts/' . $user_session) ?>">My Profile</a>
+									<a class="dropdown-item" href="<?= site_url('bimbel_yang_di_ikuti') ?>">My Bimbel</a>
+									</div>
+								</li>
+
+								<?php endif ?>
+							<?php } ?>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 						
 					</ul>
 					<div class="my-2 my-lg-0">
@@ -86,6 +127,7 @@
 							</li> -->
 							<?php 
 							$ci =& get_instance();
+<<<<<<< HEAD
 							$user_session = $ci->session->userdata('id');
     						if($user_session) { ?>
 								<?php if (($this->fungsi->user_login()->bimbel_user_type_id == 1) OR ($this->fungsi->user_login()->bimbel_user_type_id == 2)) : ?>
@@ -126,6 +168,20 @@
 								
 								<li class="list-inline-item">
 									<a class="btn btn-success btn-sm" href="<?= base_url() ?>auth/logout">Sign Out</a>
+=======
+    						$user_session = $ci->session->userdata('id');
+    						if($user_session) { ?>
+								<?php if (($this->fungsi->user_login()->bimbel_user_type_id == 1) OR ($this->fungsi->user_login()->bimbel_user_type_id == 2)) : ?>
+									<li class="list-inline-item">
+									<a class="btn btn-link btn-sm" href="<?php echo base_url(); ?>dashboard"><strong><i class="mdi mdi-account"></i> <?= $this->fungsi->user_login()->name ?> (<?= $this->fungsi->user_login()->bimbel_user_type_name ?>)</strong></a>
+								</li>
+								<?php elseif (($this->fungsi->user_login()->bimbel_user_type_id == 3) OR ($this->fungsi->user_login()->bimbel_user_type_id == 4)) : ?>
+								<li class="list-inline-item">
+									<a class="btn btn-link btn-sm" href="#"><strong><i class="mdi mdi-account"></i> <?= $this->fungsi->user_login()->name ?> (<?= $this->fungsi->user_login()->bimbel_user_type_name ?>)</strong></a>
+								</li>
+								<li class="list-inline-item">
+									<a class="btn btn-success btn-sm" href="<?= base_url() ?>auth/logout" onclick="return confirm('Ready to Leave ?');">Sign Out</a>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 								</li>
 								<?php endif ?>
 							<?php } ?>
@@ -219,9 +275,13 @@
 	<!-- Page level plugins -->
 	<script src="<?= base_url() ?>assets/vendor/datatables/jquery.dataTables.min.js"></script>
 	<script src="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+<<<<<<< HEAD
 	<script src="<?= base_url() ?>assets/summernote/summernote-bs4.min.js"></script>
 	<!-- Toastr -->
 	<script src="<?= base_url() ?>assets/frontend/toastr/toastr.min.js"></script>
+=======
+
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 	<!-- Page level custom scripts -->
 	<script src="<?= base_url() ?>assets/js/demo/datatables-demo.js"></script>
 	<!-- Custom -->

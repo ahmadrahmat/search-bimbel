@@ -105,6 +105,22 @@ class Model_tutor extends CI_Model {
 	}
 
 	//custom function model tutor
+	public function getJobApplicationByIdTutorByIdOrganization($id, $id_org)
+	{
+		$this->db->select('job_application.*, tutor.id as tutor_id, organization.name as organization_name, organization.phone as organization_phone');
+		$this->db->from('job_application');
+		$this->db->join('tutor', 'tutor.id = job_application.tutor_id');
+		$this->db->join('organization', 'organization.id = job_application.organization_id');
+		$multipleWhere = ['tutor.bimbel_user_id' => $id, 'job_application.organization_id' => $id_org];
+		$this->db->where($multipleWhere);
+		//$this->db->where('organization.id', $id_org);
+		
+		$query = $this->db->get();
+		return $query;
+		// return $this->db->query("SELECT job_application.*, organization.*, tutor.* FROM job_application, organization, tutor WHERE job_application.organization_id = organization.id AND job_application.tutor_id = tutor.id AND tutor.bimbel_user_id = '$id' AND job_application.organization_id = '$id_org'");
+	}
+
+	//custom function model tutor
 	public function getSubjectByIdTutor($id = null)
 	{
 		$this->db->select('subject.*, subject_type.name as subject_type_name, tutor.id as tutor_id, organization.name as organization_name');

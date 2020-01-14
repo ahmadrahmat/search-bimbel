@@ -73,12 +73,16 @@
                                             </div>
                                             <div class="card-footer">
                                             <span><i class="mdi mdi-phone"></i> Contact : <strong><?= $data->phone ?></strong></span>
+<<<<<<< HEAD
                                             <span><i class="mdi mdi-book"></i> Subjects : <strong><?php 
                                              $count_subject = $this->db->query("SELECT COUNT(id) as subject FROM `subject` WHERE organization_id=$data->organization_id");
                                              foreach ($count_subject->result() as $k) {
                                                 echo $k->subject;
                                              }
                                              ?></strong></span>
+=======
+                                            <span><i class="mdi mdi-book"></i> Subjects : <strong>5</strong></span>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
                                             </div>
                                         </div>
                                     </div>

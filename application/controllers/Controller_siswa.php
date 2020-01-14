@@ -67,6 +67,7 @@ class Controller_siswa extends CI_Controller {
 			}
 			//redirect('auth/login');
 		} 
+<<<<<<< HEAD
 	}
 
 	public function rating()
@@ -109,6 +110,8 @@ class Controller_siswa extends CI_Controller {
 			}
 			//redirect('auth/login');
 		} 
+=======
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 	}
 	
 	public function bimbel_yang_di_ikuti()

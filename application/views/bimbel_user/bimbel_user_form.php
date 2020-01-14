@@ -54,8 +54,13 @@
 				<select name="bimbel_user_type_id" class="form-control" required>
 					<option value="">- Pilih -</option>
 					<?php $query = $this->db->query("SELECT * FROM bimbel_user_type WHERE id = 1 OR id = 2") ?>
+<<<<<<< HEAD
 					<?php foreach ($query->result() as $key => $data) : ?>
 						<option value="<?= $data->id ?>" <?= $data->id == $row->bimbel_user_type_id ? "selected" : null ?>><?= $data->name ?></option>
+=======
+					<?php foreach($query->result() as $key => $data) : ?>
+					<option value="<?=$data->id?>" <?=$data->id == $row->bimbel_user_type_id ? "selected" : null?>><?=$data->name?></option>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 					<?php endforeach; ?>
 				</select>
 			</div>

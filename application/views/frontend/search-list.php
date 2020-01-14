@@ -103,6 +103,7 @@
                                           <img class="d-block w-100" src="<?= base_url() ?>assets/frontend/images/no_image.jpg" style="height: 300px"></div>
                                           <?php } ?>
                                        </div>
+<<<<<<< HEAD
                                        <!-- <a class="carousel-control-prev" href="#carouselExampleIndicators<?php //echo $data->organization_id; ?>" role="button" data-slide="prev">
                                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                           <span class="sr-only">Previous</span>
@@ -111,6 +112,16 @@
                                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                           <span class="sr-only">Next</span>
                                        </a> -->
+=======
+                                       <a class="carousel-control-prev" href="#carouselExampleIndicators<?php echo $data->organization_id; ?>" role="button" data-slide="prev">
+                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                          <span class="sr-only">Previous</span>
+                                       </a>
+                                       <a class="carousel-control-next" href="#carouselExampleIndicators<?php echo $data->organization_id; ?>" role="button" data-slide="next">
+                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                          <span class="sr-only">Next</span>
+                                       </a>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
                                     </div>
                                  </div>
                                  <div class="col-lg-7 col-md-7">

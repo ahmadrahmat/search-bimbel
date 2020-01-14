@@ -5,9 +5,14 @@ class Home extends CI_Controller {
 
 	function __construct()
     {
+<<<<<<< HEAD
 		parent::__construct();
 		// check_not_login();
         $this->load->model(['model_home', 'model_siswa', 'model_tutor', 'organization_m', 'enrollment_m', 'city_m', 'review_m', 'model_email', 'bimbel_user_m']);
+=======
+        parent::__construct();
+        $this->load->model(['model_home', 'model_siswa', 'model_tutor', 'organization_m', 'enrollment_m', 'city_m']);
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
     }
 
 	public function index()
@@ -35,7 +40,10 @@ class Home extends CI_Controller {
             'student'         => $query_student,
             'subject'         => $query_subject,
             'job'             => $query_job,
+<<<<<<< HEAD
             'review'          => $query_review,
+=======
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 			'organization_id' => $id,
 			'bimbel_user'	  => $this->fungsi->user_login()->id
         );
@@ -129,7 +137,11 @@ class Home extends CI_Controller {
 		$city = $this->input->get('city');
 		$search = $this->input->get('search');
 		//konfigurasi pagination
+<<<<<<< HEAD
 		$config['base_url'] = site_url('home/latest?subject='. $subject .'&organization='. $organization .'&city='. $city);
+=======
+		$config['base_url'] = site_url('home/cari?subject='. $subject .'&organization='. $organization .'&city='. $city);
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 		$config['total_rows'] = $this->model_home->get_count($subject, $organization, $city); //total row
 		$config['per_page'] = 5;  //show record per halaman
 		$config['enable_query_strings'] = TRUE;
@@ -167,7 +179,11 @@ class Home extends CI_Controller {
 	
 		$this->pagination->initialize($config);
 		
+<<<<<<< HEAD
 		$data['row'] = $this->model_home->latest_data($subject, $organization, $city, $config["per_page"], $segment);           
+=======
+		$data['row'] = $this->model_home->fetch_data($subject, $organization, $city, $config["per_page"], $segment);           
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 	
 		$data['pagination'] = $this->pagination->create_links();
 
@@ -183,7 +199,11 @@ class Home extends CI_Controller {
 		$this->template->load('frontend/template', 'frontend/about');
 	}
 
+<<<<<<< HEAD
 	public function contactus()
+=======
+	public function contact()
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 	{
 		// $data['row'] = $this->model_siswa->getOrganizationWhereActivated();
 		// $data['city'] = $this->city_m->get();
@@ -196,6 +216,7 @@ class Home extends CI_Controller {
 		$this->template->load('frontend/template', 'frontend/bimbel-popular', $data);
 	}
 
+<<<<<<< HEAD
 
 	/////////// MAIL FRONTEND ///////////////
 	public function email()
@@ -302,4 +323,6 @@ class Home extends CI_Controller {
 		redirect('home/email');
 	}
 
+=======
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 }

@@ -37,7 +37,11 @@
 								<?php if($data->status == 2) { 
 									echo '<label><i class="badge badge-success">Finished</i></label>';
 								} elseif($data->status == 3) {
+<<<<<<< HEAD
 									echo '<label><i class="badge badge-danger">Rejected</i></label>';
+=======
+									echo '<label><i class="badge badge-warning">Rejected</i></label>';
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 								} ?>
 							</td>
 							<td><?= $data->subject_type_name ?></td>

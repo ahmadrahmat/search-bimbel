@@ -38,12 +38,21 @@
 							<td><?= $data->subject_type_name ?></td>
 							<td><?= $data->organization_name ?></td>
 							<td>
+<<<<<<< HEAD
 								<?php
 								$num = 1;
 								$query = $this->db->query("SELECT * FROM subject_tutor WHERE subject_id = $data->id");
 								foreach ($query->result() as $value => $val) :
 								?>
 									<?= $val->tutor_id != 0 || $val->tutor_id != null ? $num++ . '. ' . $this->fungsi->get_tutor_name($val->tutor_id)->name . '<br>' : '' ?>
+=======
+								<?php 
+									$num = 1;
+									$query = $this->db->query("SELECT * FROM subject_tutor WHERE subject_id = $data->id");
+									foreach ($query->result() as $value => $val) : 
+								?>
+								<?= $val->tutor_id != 0 || $val->tutor_id != null ? $num++.'. '. $this->fungsi->get_tutor_name($val->tutor_id)->name .'<br>' : '' ?>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 								<?php endforeach ?>
 							</td>
 							<td class="text-center" style="width: 25%">

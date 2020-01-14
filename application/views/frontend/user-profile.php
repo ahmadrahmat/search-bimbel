@@ -26,11 +26,20 @@
                            <div class="form-group">
                            	<label>Name <sup class="text-danger">*</sup></label>
                            	<input type="hidden" name="id" value="<?= $row->id ?>">
+<<<<<<< HEAD
                            	<input type="text" name="name" value="<?= $row->name ?>" class="form-control">
                            </div>
                            <div class="form-group">
                            	<label>Username <sup class="text-danger">*</sup></label>
                            	<input type="text" name="username" value="<?= $row->username ?>" class="form-control" readonly>
+=======
+                           	<input type="text" name="name" value="<?= $row->name ?>" class="form-control" required>
+                           </div>
+                           <div class="form-group">
+                           	<label>Username <sup class="text-danger">*</sup></label>
+                           	<input type="text" name="username" value="<?= $row->username ?>" class="form-control"
+                           		required>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
                            </div>
                            <div class="form-group">
                            	<label>Password <sup class="text-danger">*</sup></label>
@@ -39,7 +48,11 @@
                            </div>
                            <div class="form-group">
                            	<label>Email <sup class="text-danger">*</sup></label>
+<<<<<<< HEAD
                            	<input type="email" name="email" value="<?= $row->email ?>" class="form-control" readonly>
+=======
+                           	<input type="email" name="email" value="<?= $row->email ?>" class="form-control" required>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
                            </div>
                            <div class="form-group">
                            	<label>Phone <sup class="text-danger">*</sup></label>
@@ -67,6 +80,10 @@
                      <div class="form-group">
                         <button type="submit" name="<?= $page ?>" class="btn btn-success btn-flat">
                            <i class="fa fa-paper-plane"></i> Save</button>
+<<<<<<< HEAD
+=======
+                        <button type="reset" class="btn btn-flat">Reset</button>
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
                      </div>
                      <!-- <div class="card padding-card">
                         <div class="card-body">

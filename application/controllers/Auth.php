@@ -104,6 +104,7 @@ class Auth extends CI_Controller {
 	public function signup()
     {
         //$post = $this->input->post(null, TRUE);
+<<<<<<< HEAD
         // if(isset($_POST['add'])) {
 			$username 	= $this->input->post('username', true);
 			$email 		= $this->input->post('email', true);
@@ -140,6 +141,26 @@ class Auth extends CI_Controller {
 			
 
 		// } 
+=======
+        if(isset($_POST['add'])) {
+			$post = array(
+				'name'                => $this->input->post('name', true),
+				'username'            => $this->input->post('username', true),
+				'password'            => $this->input->post('password', true),
+				'email'               => $this->input->post('email', true),
+				'phone'               => $this->input->post('phone', true),
+				'address'             => $this->input->post('address', true),
+				'city_id'             => $this->input->post('city_id', true),
+				'bimbel_user_type_id' => $this->input->post('bimbel_user_type_id', true)
+			);
+			$this->bimbel_user_m->add($post);
+			//print_r($post);
+			if($this->db->affected_rows() >0 ) {
+				$this->session->set_flashdata('success', 'Registration successful. Please login using your username and password!');
+			}
+			redirect('auth/login');
+		} 
+>>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 
         
     }
