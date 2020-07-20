@@ -68,9 +68,37 @@ class Bimbel_user extends CI_Controller {
     {
         $post = $this->input->post(null, TRUE);
         if(isset($_POST['add'])) {
-            $this->bimbel_user_m->add($post);
+            $username 	= $this->input->post('username', true);
+			$email 		= $this->input->post('email', true);
+			$cek 		= $this->bimbel_user_m->cekUsername($username);
+			$cekEmail 	= $this->bimbel_user_m->cekEmail($email);
+			if (count($cek) == 1) {
+				$this->session->set_flashdata('username', 'Registration failure. Username already exists!');
+				// $this->session->set_flashdata('username', 'Username already exists!');
+				redirect('bimbel_user/add');
+			} elseif (count($cekEmail) == 1) {
+				$this->session->set_flashdata('email', 'Registration failure. Email already exists!');
+					// $this->session->set_flashdata('email', 'Email already exists!');
+				redirect('bimbel_user/add');
+			} else {
+                $this->bimbel_user_m->add($post);
+			}
         } else if(isset($_POST['edit'])) {
-            $this->bimbel_user_m->edit($post);
+            $username 	= $this->input->post('username', true);
+			$email 		= $this->input->post('email', true);
+			$cek 		= $this->bimbel_user_m->cekUsername($username);
+			$cekEmail 	= $this->bimbel_user_m->cekEmail($email);
+			if (count($cek) == 1) {
+				$this->session->set_flashdata('username', 'Registration failure. Username already exists!');
+				// $this->session->set_flashdata('username', 'Username already exists!');
+				redirect('bimbel_user/add');
+			} elseif (count($cekEmail) == 1) {
+				$this->session->set_flashdata('email', 'Registration failure. Email already exists!');
+					// $this->session->set_flashdata('email', 'Email already exists!');
+				redirect('bimbel_user/add');
+			} else {
+                $this->bimbel_user_m->edit($post);
+			}
         } 
 
         if($this->db->affected_rows() >0 ) {
@@ -106,7 +134,6 @@ class Bimbel_user extends CI_Controller {
 		$this->template->load('template', 'bimbel_user/account_data', $data);
 	}
 
-<<<<<<< HEAD
 	//public function account_edit_ts($id)
 	public function account_edit_ts()
     {
@@ -119,10 +146,6 @@ class Bimbel_user extends CI_Controller {
         //$hasil_dekripsi = $this->encryption->decrypt($ms); 
         // print_r($hasil_dekripsi);
         $id = $this->fungsi->user_login()->id;
-=======
-	public function account_edit_ts($id)
-    {
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
         $query = $this->bimbel_user_m->get($id);
         if($query->num_rows() > 0) {
 			$bimbel_user = $query->row();
@@ -176,11 +199,7 @@ class Bimbel_user extends CI_Controller {
             //$this->session->set_flashdata('success', 'Data berhasil disimpan');
             echo "<script>
 				alert('Data berhasil disimpan');
-<<<<<<< HEAD
 				window.location='".site_url('akun/editts')."'
-=======
-				window.location='".site_url('akun/editts/'.$id.'')."'
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 				</script>";
         }
         //redirect('akun');

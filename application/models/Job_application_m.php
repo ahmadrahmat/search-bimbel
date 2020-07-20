@@ -19,7 +19,7 @@ class Job_application_m extends CI_Model {
 	
     public function getJobAppByOrganizationId($id = null)
     {
-		$this->db->select('job_application.*, organization.name as organization_name, tutor.bimbel_user_id, bimbel_user.name as bimbel_user_name');
+		$this->db->select('job_application.*, organization.name as organization_name, tutor.bimbel_user_id, bimbel_user.name as bimbel_user_name, bimbel_user.phone as phone, bimbel_user.address as address');
         $this->db->from('job_application');
         $this->db->join('organization', 'organization.id = job_application.organization_id');
         $this->db->join('owner', 'owner.id = organization.owner_id');

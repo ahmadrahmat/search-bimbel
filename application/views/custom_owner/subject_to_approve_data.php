@@ -1,13 +1,12 @@
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Subject To Approve</h1>
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+<h1 class="h3 mb-2 text-gray-800">New Enrollment</h1>
 
 <?php $this->view('messages'); ?>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">Subject To Approve</h6>
+		<h6 class="m-0 font-weight-bold text-primary">New Enrollment</h6>
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
@@ -34,7 +33,6 @@
 						<tr>
 							<td style="width: 5%"><?= $no++ ?></td>
 							<td>
-<<<<<<< HEAD
 								<?php if ($data->status == 0) : ?>
 									<?php
 									$this->db->select('subject.id as subject_id');
@@ -47,31 +45,21 @@
 									$sql = $this->db->get()->num_rows();
 									if ($sql > 0) :
 									?>
-										<a href="<?= site_url('controller_owner/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approve data ini?')">
+										<button type="button" class="btn btn-sm btn-success" data-target="#approved<?= $data->id ?>" data-toggle="modal">
 											<i class="fa fa-check"></i> Approve
-										</a>
+										</button>
+
 									<?php endif ?>
-=======
-								<?php if($data->status == 0) : ?>
-									<a href="<?= site_url('controller_owner/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approve data ini?')">
-										<i class="fa fa-check"></i> Approve
-									</a>
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 								<?php endif ?>
 								<!-- <a href="#!" class="btn btn-sm btn-info">
 									<i class="fa fa-eye"></i> Detail
 								</a> -->
-								<a href="<?= site_url('subject_to_approve_edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
-									<i class="fa fa-pen"></i> Update
+								<a href="<?= site_url('new_enrollment_edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
+									<i class="fa fa-pen"></i> Edit
 								</a>
-								<a href="<?= site_url('controller_owner/reject/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Reject data ini?')">
-<<<<<<< HEAD
+								<button type="button" class="btn btn-sm btn-warning" data-target="#rejected<?= $data->id ?>" data-toggle="modal">
 									<i class="fa fa-ban"></i> Reject
-								</a>
-=======
-										<i class="fa fa-ban"></i> Reject
-									</a>
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
+								</button>
 								<!-- <a href="<?= site_url('controller_owner/subject_to_approve_delete/' . $data->id) ?>" onclick="return confirm('Yakin hapus data ini?');" class="btn btn-sm btn-danger">
 									<i class="fa fa-trash"></i> Delete
 								</a> -->
@@ -80,21 +68,12 @@
 							<td><a href="<?= site_url('subject/edit/' . $data->subject_id) ?>"><?= $data->subject_name ?></a></td>
 							<td><?= $this->fungsi->get_student_name($data->student_id)->name ?></td>
 							<td>
-<<<<<<< HEAD
 								<?php
 								$num = 1;
 								$query = $this->db->query("SELECT * FROM subject_tutor WHERE subject_id = $data->subject_id");
 								foreach ($query->result() as $value => $val) :
 								?>
 									<?= $val->tutor_id != 0 || $val->tutor_id != null ? $num++ . '.' . $this->fungsi->get_tutor_name($val->tutor_id)->name : '' ?>
-=======
-								<?php 
-									$num = 1;
-									$query = $this->db->query("SELECT * FROM subject_tutor WHERE subject_id = $data->subject_id");
-									foreach ($query->result() as $value => $val) : 
-								?>
-								<?= $val->tutor_id != 0 || $val->tutor_id != null ? $num++.'.'. $this->fungsi->get_tutor_name($val->tutor_id)->name : '' ?>
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 								<?php endforeach ?>
 							</td>
 							<td><?= $data->start_date ?></td>
@@ -104,6 +83,36 @@
 							<td><?= $data->phone ?></td>
 							<td><?= $data->note ?></td>
 						</tr>
+						<div class="modal fade" id="approved<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Approve data ini?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-footer">
+										<a href="<?= site_url('controller_owner/approved/' . $data->id) ?>" class="btn btn-sm btn-success">Approve</a>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="modal fade" id="rejected<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog modal-sm" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Reject data ini?</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+										</button>
+									</div>
+									<div class="modal-footer">
+										<a href="<?= site_url('controller_owner/reject/' . $data->id) ?>" class="btn btn-sm btn-warning">Reject</a>
+									</div>
+								</div>
+							</div>
+						</div>
 					<?php endforeach ?>
 				</tbody>
 			</table>

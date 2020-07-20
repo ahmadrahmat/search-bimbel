@@ -4,9 +4,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-	<meta charset="utf-8">
+	
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
@@ -23,10 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<link href="<?= base_url() ?>assets/css/sb-admin-2.min.css" rel="stylesheet">
 	<link href="<?= base_url() ?>assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 	<link href="<?= base_url() ?>assets/select2/css/select2.min.css" rel="stylesheet">
-<<<<<<< HEAD
 	<link href="<?=base_url()?>assets/jquery-ui-1.12.1/jquery-ui.css" rel="stylesheet">
-=======
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 
 </head>
 
@@ -55,7 +52,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<i class="fas fa-fw fa-tachometer-alt"></i>
 					<span>Dashboard</span></a>
 			</li>
-<<<<<<< HEAD
 			<?php if ($this->fungsi->user_login()->bimbel_user_type_id != 1) : ?>
 				<!-- Nav Item -->
 				<li class="nav-item <?= $this->uri->segment(1) == 'email' ? 'active' : '' ?>">
@@ -64,9 +60,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<span>Email</span></a>
 				</li>
 			<?php endif ?>
-=======
-
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 			<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 1) : ?>
 				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item 
@@ -82,7 +75,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 						<div class="bg-white py-2 collapse-inner rounded">
 							<!-- <h6 class="collapse-header"></h6> -->
 							<a class="collapse-item <?= $this->uri->segment(1) == 'bimbel_user' ? 'active' : '' ?>" href="<?= site_url('bimbel_user') ?>">Bimbel User</a>
-							<a class="collapse-item <?= $this->uri->segment(1) == 'bimbel_user_type' ? 'active' : '' ?>" href="<?= site_url('bimbel_user_type') ?>">Bimbel User Type / Role</a>
+							<!--<a class="collapse-item <?= $this->uri->segment(1) == 'bimbel_user_type' ? 'active' : '' ?>" href="<?= site_url('bimbel_user_type') ?>">Bimbel User Type / Role</a>-->
 						</div>
 					</div>
 				</li>
@@ -90,10 +83,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item
 			<?= $this->uri->segment(1) == 'owner' ||
-<<<<<<< HEAD
 					$this->uri->segment(1) == 'tutor' ||
 					$this->uri->segment(1) == 'student' ||
-					$this->uri->segment(1) == 'organization' ||
+					$this->uri->segment(1) == 'bimbel' ||
 					$this->uri->segment(1) == 'subject_type' ? 'active' : '' ?>
 			">
 					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDM" aria-expanded="true" aria-controls="collapseDM">
@@ -104,40 +96,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 					<?= $this->uri->segment(1) == 'owner' ||
 						$this->uri->segment(1) == 'tutor' ||
 						$this->uri->segment(1) == 'student' ||
-						$this->uri->segment(1) == 'organization' ||
+						$this->uri->segment(1) == 'bimbel' ||
 						$this->uri->segment(1) == 'subject_type' ? 'show' : '' ?>" aria-labelledby="headingDM" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
 							<!-- <h6 class="collapse-header"></h6> -->
 							<a class="collapse-item <?= $this->uri->segment(1) == 'owner' ? 'active' : '' ?>" href="<?= site_url('owner') ?>">Owner</a>
 							<a class="collapse-item <?= $this->uri->segment(1) == 'tutor' ? 'active' : '' ?>" href="<?= site_url('tutor') ?>">Tutor</a>
 							<a class="collapse-item <?= $this->uri->segment(1) == 'student' ? 'active' : '' ?>" href="<?= site_url('student') ?>">Student</a>
-							<a class="collapse-item <?= $this->uri->segment(1) == 'organization' ? 'active' : '' ?>" href="<?= site_url('organization') ?>">Organization</a>
+							<a class="collapse-item <?= $this->uri->segment(1) == 'bimbel' ? 'active' : '' ?>" href="<?= site_url('bimbel') ?>">Bimbel</a>
 							<a class="collapse-item <?= $this->uri->segment(1) == 'subject_type' ? 'active' : '' ?>" href="<?= site_url('subject_type') ?>">Subject Type</a>
 						</div>
-=======
-				$this->uri->segment(1) == 'tutor' ||
-				$this->uri->segment(1) == 'student' ||
-				$this->uri->segment(1) == 'organization' ||
-				$this->uri->segment(1) == 'subject_type' ? 'active' : '' ?>
-			">
-				<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDM" aria-expanded="true" aria-controls="collapseDM">
-					<i class="fas fa-fw fa-database"></i>
-					<span>Data Master</span>
-				</a>
-				<div id="collapseDM" class="collapse
-					<?= $this->uri->segment(1) == 'owner' ||
-					$this->uri->segment(1) == 'tutor' ||
-					$this->uri->segment(1) == 'student' ||
-					$this->uri->segment(1) == 'organization' ||
-					$this->uri->segment(1) == 'subject_type' ? 'show' : '' ?>" aria-labelledby="headingDM" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<!-- <h6 class="collapse-header"></h6> -->
-						<a class="collapse-item <?= $this->uri->segment(1) == 'owner' ? 'active' : '' ?>" href="<?= site_url('owner') ?>">Owner</a>
-						<a class="collapse-item <?= $this->uri->segment(1) == 'tutor' ? 'active' : '' ?>" href="<?= site_url('tutor') ?>">Tutor</a>
-						<a class="collapse-item <?= $this->uri->segment(1) == 'student' ? 'active' : '' ?>" href="<?= site_url('student') ?>">Student</a>
-						<a class="collapse-item <?= $this->uri->segment(1) == 'organization' ? 'active' : '' ?>" href="<?= site_url('organization') ?>">Organization</a>
-						<a class="collapse-item <?= $this->uri->segment(1) == 'subject_type' ? 'active' : '' ?>" href="<?= site_url('subject_type') ?>">Subject Type</a>
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 					</div>
 				</li>
 
@@ -165,7 +133,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<?php endif ?>
 
 			<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 2) : ?>
-<<<<<<< HEAD
 				<!-- Nav Item -->
 				<li class="nav-item <?= $this->uri->segment(1) == 'subject' ? 'active' : '' ?>">
 					<a class="nav-link" href="<?= site_url('subject') ?>">
@@ -180,43 +147,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				</li>
 				<!-- Nav Item - Pages Collapse Menu -->
 				<li class="nav-item
-=======
-			<!-- Nav Item -->
-			<li class="nav-item <?= $this->uri->segment(1) == 'subject' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?= site_url('subject') ?>">
-					<i class="fas fa-fw fa-book"></i>
-					<span>Subject</span></a>
-			</li>
-			<!-- Nav Item -->
-			<li class="nav-item <?= $this->uri->segment(1) == 'job_application' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?= site_url('job_application') ?>">
-					<i class="fas fa-fw fa-briefcase"></i>
-					<span>Tutor</span></a>
-			</li>
-			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
-			<?= $this->uri->segment(1) == 'subject_to_approve' ||
-					$this->uri->segment(1) == 'subject_to_approve_edit' ||
-					$this->uri->segment(1) == 'subject_ongoing' ||
-					$this->uri->segment(1) == 'history_subject' ? 'active' : '' ?>
+			<?= $this->uri->segment(1) == 'new_enrollment' ||
+					$this->uri->segment(1) == 'new_enrollment_edit' ||
+					$this->uri->segment(1) == 'ongoing_enrollment' ||
+					$this->uri->segment(1) == 'ongoing_enrollment_edit' ||
+					$this->uri->segment(1) == 'enrollment_history' ? 'active' : '' ?>
 			">
 					<a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTS" aria-expanded="true" aria-controls="collapseTS">
 						<i class="fas fa-fw fa-credit-card"></i>
 						<span>Transaksi</span>
 					</a>
 					<div id="collapseTS" class="collapse
-					<?= $this->uri->segment(1) == 'subject_to_approve' ||
-						$this->uri->segment(1) == 'subject_to_approve_edit' ||
-						$this->uri->segment(1) == 'subject_ongoing' ||
-						$this->uri->segment(1) == 'history_subject' ? 'show' : '' ?>" aria-labelledby="headingTS" data-parent="#accordionSidebar">
+					<?= $this->uri->segment(1) == 'new_enrollment' ||
+						$this->uri->segment(1) == 'new_enrollment_edit' ||
+						$this->uri->segment(1) == 'ongoing_enrollment' ||
+						$this->uri->segment(1) == 'ongoing_enrollment_edit' ||
+						$this->uri->segment(1) == 'enrollment_history' ? 'show' : '' ?>" aria-labelledby="headingTS" data-parent="#accordionSidebar">
 						<div class="bg-white py-2 collapse-inner rounded">
-							<a class="collapse-item <?= $this->uri->segment(1) == 'subject_to_approve' || $this->uri->segment(1) == 'subject_to_approve_edit' ? 'active' : '' ?>" href="<?= site_url('subject_to_approve') ?>">Subject To Approve</a>
-							<a class="collapse-item <?= $this->uri->segment(1) == 'subject_ongoing' ? 'active' : '' ?>" href="<?= site_url('subject_ongoing') ?>">Subject Ongoing</a>
-							<a class="collapse-item <?= $this->uri->segment(1) == 'history_subject' ? 'active' : '' ?>" href="<?= site_url('history_subject') ?>">History Subject</a>
+							<a class="collapse-item <?= $this->uri->segment(1) == 'new_enrollment' || $this->uri->segment(1) == 'new_enrollment_edit' ? 'active' : '' ?>" href="<?= site_url('new_enrollment') ?>">New Enrollment</a>
+							<a class="collapse-item <?= $this->uri->segment(1) == 'ongoing_enrollment' || $this->uri->segment(1) == 'ongoing_enrollment_edit' ? 'active' : '' ?>" href="<?= site_url('ongoing_enrollment') ?>">Ongoing Enrollment</a>
+							<a class="collapse-item <?= $this->uri->segment(1) == 'enrollment_history' ? 'active' : '' ?>" href="<?= site_url('enrollment_history') ?>">Enrollment History</a>
 						</div>
 					</div>
-<<<<<<< HEAD
 				</li>
 			<?php endif ?>
 
@@ -247,38 +199,12 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								?>">
 				<a class="nav-link" href="<? //= site_url('akun') 
 											?>">
-=======
-				</div>
-			</li>
-			<?php endif ?>
-
-			<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 3) : ?>
-			<!-- Nav Item -->
-			<!-- <li class="nav-item <?//= $this->uri->segment(1) == 'semua_organisasi' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?//= site_url('semua_organisasi') ?>">
-					<i class="fas fa-fw fa-building"></i>
-					<span>Semua Bimbel</span></a>
-			</li>
-			<li class="nav-item <?//= $this->uri->segment(1) == 'bimbel_yang_sedang_terdaftar' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?//= site_url('bimbel_yang_sedang_terdaftar') ?>">
-					<i class="fas fa-fw fa-bookmark"></i>
-					<span>Bimbel Yang Sedang Terdaftar</span></a>
-			</li>
-			<li class="nav-item <?//= $this->uri->segment(1) == 'bimbel_yang_sedang_diajar' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?//= site_url('bimbel_yang_sedang_diajar') ?>">
-					<i class="fas fa-fw fa-bookmark"></i>
-					<span>Bimbel Yang Sedang Diajar</span></a>
-			</li>
-			<li class="nav-item <?//= $this->uri->segment(1) == 'akun' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?//= site_url('akun') ?>">
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 					<i class="fas fa-fw fa-user"></i>
 					<span>Akun</span></a>
 			</li> -->
 			<?php endif ?>
 
 			<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 4) : ?>
-<<<<<<< HEAD
 				<!-- Nav Item -->
 				<!-- <li class="nav-item <? //= $this->uri->segment(1) == 'semua_bimbel' ? 'active' : '' 
 											?>">
@@ -298,21 +224,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								?>">
 				<a class="nav-link" href="<? //= site_url('akun') 
 											?>">
-=======
-			<!-- Nav Item -->
-			<!-- <li class="nav-item <?//= $this->uri->segment(1) == 'semua_bimbel' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?//= site_url('semua_bimbel') ?>">
-					<i class="fas fa-fw fa-building"></i>
-					<span>Semua Bimbel</span></a>
-			</li>
-			<li class="nav-item <?//= $this->uri->segment(1) == 'bimbel_yang_di_ikuti' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?//= site_url('bimbel_yang_di_ikuti') ?>">
-					<i class="fas fa-fw fa-bookmark"></i>
-					<span>Bimbel Yang Di Ikuti</span></a>
-			</li>
-			<li class="nav-item <?//= $this->uri->segment(1) == 'akun' ? 'active' : '' ?>">
-				<a class="nav-link" href="<?//= site_url('akun') ?>">
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 					<i class="fas fa-fw fa-user"></i>
 					<span>Akun</span></a>
 			</li> -->
@@ -345,7 +256,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 					<!-- Topbar Navbar -->
 					<ul class="navbar-nav ml-auto">
-<<<<<<< HEAD
 						<?php
 						$send_to = $this->fungsi->user_login()->id;
 						$sql = $this->db->query("SELECT count(status) as notif FROM email WHERE send_to = $send_to AND status = '0'");
@@ -390,9 +300,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 								<a class="dropdown-item text-center small text-gray-500" href="<?= site_url('email') ?>">Show All Email</a>
 							</div>
 						</li>
-=======
-
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 						<div class="topbar-divider d-none d-sm-block"></div>
 
 						<!-- Nav Item - User Information -->
@@ -408,7 +315,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 									Profile
 								</a>
 								<div class="dropdown-divider"></div>
-								<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+								<!--<a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Logout
+								</a>-->
+								<a class="dropdown-item" href="<?= site_url('auth/logout') ?>">
 									<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 									Logout
 								</a>
@@ -435,7 +346,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Seacrh BimBel 2019</span>
+						<span>Copyright &copy; Search BimBel 2019</span>
 					</div>
 				</div>
 			</footer>
@@ -489,7 +400,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 	<script src="<?= base_url() ?>assets/summernote/summernote-bs4.min.js"></script>
 	<script src="<?= base_url() ?>assets/js/demo/datatables-demo.js"></script>
 	<script src="<?= base_url() ?>assets/select2/js/select2.min.js"></script>
-<<<<<<< HEAD
 	<script src="<?= base_url() ?>assets/jquery-ui-1.12.1/jquery-ui.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function() {
@@ -512,11 +422,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			$("#contact").select2();
 		});
 	</script>
-=======
-	<script>
-        $(document).ready(function() { $("#tutor_id").select2(); });
-    </script>
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 
 </body>
 

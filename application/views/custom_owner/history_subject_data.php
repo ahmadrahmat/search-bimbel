@@ -1,13 +1,12 @@
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">History Subject</h1>
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+<h1 class="h3 mb-2 text-gray-800">Enrollment History</h1>
 
 <?php $this->view('messages'); ?>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary">History Subject</h6>
+		<h6 class="m-0 font-weight-bold text-primary">Enrollment History</h6>
 	</div>
 	<div class="card-body">
 		<div class="table-responsive">
@@ -37,11 +36,7 @@
 								<?php if($data->status == 2) { 
 									echo '<label><i class="badge badge-success">Finished</i></label>';
 								} elseif($data->status == 3) {
-<<<<<<< HEAD
 									echo '<label><i class="badge badge-danger">Rejected</i></label>';
-=======
-									echo '<label><i class="badge badge-warning">Rejected</i></label>';
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 								} ?>
 							</td>
 							<td><?= $data->subject_type_name ?></td>

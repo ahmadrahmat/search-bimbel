@@ -55,11 +55,7 @@
                            </select>
                         </div>
                         <div class="form-group">
-<<<<<<< HEAD
                            <label>Register as <sup class="text-danger">*</sup></label>
-=======
-                           <label>Type <sup class="text-danger">*</sup></label>
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
                            <select name="bimbel_user_type_id" class="form-control" required>
                               <option value="">- Choose -</option>
                               <?php foreach($bimbel_user_type->result() as $key => $data) : ?>

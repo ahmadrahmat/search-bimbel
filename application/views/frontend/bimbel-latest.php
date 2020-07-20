@@ -52,14 +52,6 @@
                                                 <img class="d-block w-100" src="<?= base_url() ?>assets/frontend/images/no_image.jpg" style="height: 221px"></div>
                                                 <?php } ?>
                                              </div>
-                                             <a class="carousel-control-prev" href="#carouselExampleIndicators<?php echo $data->organization_id; ?>" role="button" data-slide="prev">
-                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Previous</span>
-                                             </a>
-                                             <a class="carousel-control-next" href="#carouselExampleIndicators<?php echo $data->organization_id; ?>" role="button" data-slide="next">
-                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                <span class="sr-only">Next</span>
-                                             </a>
                                           </div>
                                         </div>
                                         <div class="col-lg-7 col-md-7">
@@ -73,16 +65,12 @@
                                             </div>
                                             <div class="card-footer">
                                             <span><i class="mdi mdi-phone"></i> Contact : <strong><?= $data->phone ?></strong></span>
-<<<<<<< HEAD
                                             <span><i class="mdi mdi-book"></i> Subjects : <strong><?php 
                                              $count_subject = $this->db->query("SELECT COUNT(id) as subject FROM `subject` WHERE organization_id=$data->organization_id");
                                              foreach ($count_subject->result() as $k) {
                                                 echo $k->subject;
                                              }
                                              ?></strong></span>
-=======
-                                            <span><i class="mdi mdi-book"></i> Subjects : <strong>5</strong></span>
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
                                             </div>
                                         </div>
                                     </div>

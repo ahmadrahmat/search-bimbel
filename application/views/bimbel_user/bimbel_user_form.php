@@ -1,11 +1,22 @@
 <!-- Page Heading -->
 <h1 class="h3 mb-2 text-gray-800">Bimbel User</h1>
-<?php $this->view('messages'); ?>
+<?php if ($this->session->flashdata('username')) : ?>
+<div class="alert alert-danger">
+ <?= $this->session->flashdata('username'); ?>
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+</div>
+<?php endif; ?>
+<?php if ($this->session->flashdata('email')) : ?>
+<div class="alert alert-danger">
+ <?= $this->session->flashdata('email'); ?>
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+</div>
+<?php endif; ?>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block"><?= ucfirst($page) ?> Bimbel User</h6>
+		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">Create Bimbel User</h6>
 		<div style="float: right">
 			<a href="<?= site_url('bimbel_user') ?>" class="btn btn-sm btn-warning">
 				<i class="fa fa-user-undo"></i> Back
@@ -54,13 +65,8 @@
 				<select name="bimbel_user_type_id" class="form-control" required>
 					<option value="">- Pilih -</option>
 					<?php $query = $this->db->query("SELECT * FROM bimbel_user_type WHERE id = 1 OR id = 2") ?>
-<<<<<<< HEAD
 					<?php foreach ($query->result() as $key => $data) : ?>
 						<option value="<?= $data->id ?>" <?= $data->id == $row->bimbel_user_type_id ? "selected" : null ?>><?= $data->name ?></option>
-=======
-					<?php foreach($query->result() as $key => $data) : ?>
-					<option value="<?=$data->id?>" <?=$data->id == $row->bimbel_user_type_id ? "selected" : null?>><?=$data->name?></option>
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 					<?php endforeach; ?>
 				</select>
 			</div>

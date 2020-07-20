@@ -67,7 +67,6 @@ class Controller_siswa extends CI_Controller {
 			}
 			//redirect('auth/login');
 		} 
-<<<<<<< HEAD
 	}
 
 	public function rating()
@@ -82,13 +81,13 @@ class Controller_siswa extends CI_Controller {
 			);
 			$this->review_m->add($post);
 			//print_r($post);
-			if($this->db->affected_rows() >0 ) {
+			//if($this->db->affected_rows() >0 ) {
 			//	$this->session->set_flashdata('success', 'Registration successful. Please login using your username and password!');
 				echo "<script>
 				alert('Data berhasil disimpan');
 				window.location='".site_url('bimbel_yang_di_ikuti')."'
 				</script>";
-			}
+			//}
 			//redirect('auth/login');
 		} elseif(isset($_POST['Edit'])) {
 			$post = array(
@@ -101,17 +100,15 @@ class Controller_siswa extends CI_Controller {
 			);
 			$this->review_m->edit($post);
 			//print_r($post);
-			if($this->db->affected_rows() >0 ) {
+			//if($this->db->affected_rows() >0 ) {
 			//	$this->session->set_flashdata('success', 'Registration successful. Please login using your username and password!');
 				echo "<script>
 				alert('Data berhasil disimpan');
 				window.location='".site_url('bimbel_yang_di_ikuti')."'
 				</script>";
-			}
+			//}
 			//redirect('auth/login');
 		} 
-=======
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 	}
 	
 	public function bimbel_yang_di_ikuti()

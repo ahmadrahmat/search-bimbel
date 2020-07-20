@@ -1,3 +1,15 @@
+<?php if ($this->session->flashdata('username')) : ?>
+<div class="alert alert-danger">
+ <?= $this->session->flashdata('username'); ?>
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+</div>
+<?php endif; ?>
+<?php if ($this->session->flashdata('email')) : ?>
+<div class="alert alert-danger">
+ <?= $this->session->flashdata('email'); ?>
+ <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+</div>
+<?php endif; ?>
 <div class="card">
 	<div class="card-body">
 		<div class="row">

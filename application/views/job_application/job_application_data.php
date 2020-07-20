@@ -6,7 +6,6 @@
 		Job Application
 	<?php endif ?>
 </h1>
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
 
 <?php $this->view('messages'); ?>
 
@@ -33,8 +32,9 @@
 					<tr>
 						<th>No.</th>
 						<th>Status</th>
-						<th>Nama Organisasi</th>
 						<th>Tutor</th>
+						<th>No. Telpon</th>
+						<th>Alamat</th>
 						<th>Aksi</th>
 					</tr>
 				</thead>
@@ -44,90 +44,42 @@
 						<tr>
 							<td style="width: 5%"><?= $no++ ?></td>
 							<td>
-<<<<<<< HEAD
 								<?php if ($data->approved == 0) {
 									echo '<label><i class="badge badge-warning">Waiting</i></label>';
 								} elseif ($data->approved == 1) {
 									echo '<label><i class="badge badge-success">Approved</i></label>';
 								} elseif ($data->approved == 2) {
-									echo '<label><i class="badge badge-warning">Inactive</i></label>';
+									echo '<label><i class="badge badge-warning">Inactivate</i></label>';
 								} elseif ($data->approved == 3) {
-=======
-								<?php if($data->approved == 0) {
-									echo '<label><i class="badge badge-warning">Waiting</i></label>';
-								} elseif($data->approved == 1) {
-									echo '<label><i class="badge badge-success">Approved</i></label>';
-								} elseif($data->approved == 2) {
-									echo '<label><i class="badge badge-warning">Inactive</i></label>';
-								} elseif($data->approved == 3) {
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 									echo '<label><i class="badge badge-danger">Rejected</i></label>';
 								} ?>
 							</td>
-							<td><?= $data->organization_name ?></td>
 							<td><?= $data->bimbel_user_name ?></td>
+							<td><?= $data->phone ?></td>
+							<td><?= $data->address ?></td>
 							<td class="text-center" style="width: 25%">
-<<<<<<< HEAD
 								<?php if ($data->approved == 0) { ?>
 									<button type="button" class="btn btn-sm btn-success" data-target="#approved<?= $data->id ?>" data-toggle="modal">
-										<i class="fa fa-exclamation"></i> Approve
+										<i class="fa fa-check"></i> Approve
 									</button>
-									<button type="button" class="btn btn-sm btn-success" data-target="#rejected<?= $data->id ?>" data-toggle="modal">
-										<i class="fa fa-exclamation"></i> Reject
+									<button type="button" class="btn btn-sm btn-danger" data-target="#rejected<?= $data->id ?>" data-toggle="modal">
+										<i class="fa fa-ban"></i> Reject
 									</button>
 								<?php }
 								if ($data->approved == 1) { ?>
-									<button type="button" class="btn btn-sm btn-warning" data-target="#inactive<?= $data->id ?>" data-toggle="modal">
-										<i class="fa fa-exclamation"></i> Inactive
+									<button type="button" class="btn btn-sm btn-warning" data-target="#inactivate<?= $data->id ?>" data-toggle="modal">
+										<i class="fa fa-exclamation"></i> Inactivate
 									</button>
 								<?php }
 								if ($data->approved == 2) { ?>
-									<button type="button" class="btn btn-sm btn-success" data-target="#active<?= $data->id ?>" data-toggle="modal">
-										<i class="fa fa-exclamation"></i> Active
+									<button type="button" class="btn btn-sm btn-success" data-target="#activate<?= $data->id ?>" data-toggle="modal">
+										<i class="fa fa-check"></i> Activate
 									</button>
 								<?php }
 								if ($data->approved == 3) { ?>
 
 								<?php } ?>
 
-=======
-								<?php if($data->approved == 0) { ?>
-									<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approved tutor ini?')">
-										<i class="fa fa-check"></i> Approve
-									</a>
-									<a href="<?= site_url('job_application/inactive/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Inactive tutor ini?')">
-										<i class="fa fa-exclamation"></i> Inactive
-									</a>
-									<a href="<?= site_url('job_application/rejected/' . $data->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Reject tutor ini?')">
-										<i class="fa fa-ban"></i> Reject
-									</a>
-								<?php } if($data->approved == 1) { ?>
-									<a href="<?= site_url('job_application/inactive/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Inactive tutor ini?')">
-										<i class="fa fa-exclamation"></i> Inactive
-									</a>
-									<a href="<?= site_url('job_application/rejected/' . $data->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Reject tutor ini?')">
-										<i class="fa fa-ban"></i> Reject
-									</a>
-								<?php } if($data->approved == 2) { ?>
-									<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approved tutor ini?')">
-										<i class="fa fa-check"></i> Approve
-									</a>
-									<a href="<?= site_url('job_application/rejected/' . $data->id) ?>" class="btn btn-sm btn-danger" onclick="return confirm('Reject tutor ini?')">
-										<i class="fa fa-ban"></i> Reject
-									</a>
-								<?php } if($data->approved == 3) { ?>
-									<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success" onclick="return confirm('Approved tutor ini?')">
-										<i class="fa fa-check"></i> Approve
-									</a>
-									<a href="<?= site_url('job_application/inactive/' . $data->id) ?>" class="btn btn-sm btn-warning" onclick="return confirm('Inactive tutor ini?')">
-										<i class="fa fa-exclamation"></i> Inactive
-									</a>
-								<?php } ?>
-								
-								
-								
-								
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 								<?php if ($this->fungsi->user_login()->bimbel_user_type_id == 3) : ?>
 									<a href="<?= site_url('job_application/edit/' . $data->id) ?>" class="btn btn-sm btn-primary">
 										<i class="fa fa-pen"></i> Update
@@ -153,17 +105,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="modal fade" id="active<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="activate<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-sm" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Active tutor ini?</h5>
+										<h5 class="modal-title" id="exampleModalLabel">Activate tutor ini?</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 									<div class="modal-footer">
-										<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success">Active</a>
+										<a href="<?= site_url('job_application/approved/' . $data->id) ?>" class="btn btn-sm btn-success">Activate</a>
 									</div>
 								</div>
 							</div>
@@ -183,17 +135,17 @@
 								</div>
 							</div>
 						</div>
-						<div class="modal fade" id="inactive<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal fade" id="inactivate<?= $data->id ?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 							<div class="modal-dialog modal-sm" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Inactive tutor ini?</h5>
+										<h5 class="modal-title" id="exampleModalLabel">Inactivate tutor ini?</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
 									</div>
 									<div class="modal-footer">
-										<a href="<?= site_url('job_application/inactive/' . $data->id . '/' . $data->tutor_id) ?>" class="btn btn-sm btn-warning">Inactive</a>
+										<a href="<?= site_url('job_application/inactive/' . $data->id . '/' . $data->tutor_id) ?>" class="btn btn-sm btn-warning">Inactivate</a>
 									</div>
 								</div>
 							</div>

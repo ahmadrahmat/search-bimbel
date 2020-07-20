@@ -1,13 +1,13 @@
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Subject To Approve</h1>
+<h1 class="h3 mb-2 text-gray-800"><?= $title ?></h1>
 <?php $this->view('messages'); ?>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block"><?= ucfirst($page) ?> Subject To Approve</h6>
+		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block"><?= ucfirst($page) ?> <?= $title ?></h6>
 		<div style="float: right">
-			<a href="<?= site_url('subject_to_approve') ?>" class="btn btn-sm btn-warning">
+			<a href="<?= $title == 'New Enrollment' ? site_url('new_enrollment') : site_url('ongoing_enrollment') ?>" class="btn btn-sm btn-warning">
 				<i class="fa fa-user-undo"></i> Back
 			</a>
 		</div>
@@ -25,7 +25,7 @@
 			</div>
 			<div class="form-group">
 				<label>Waktu Mulai <sup class="text-danger">*</sup></label>
-				<input type="text" name="num_of_meeting" value="<?= $row->num_of_meeting ?>" class="form-control" required>
+				<input type="text" name="start_time" value="<?= $row->start_time ?>" class="form-control" required>
 			</div>
 			<div class="form-group">
 				<label>Durasi <sup class="text-danger">*</sup></label>

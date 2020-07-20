@@ -72,10 +72,6 @@ class Controller_tutor extends CI_Controller {
         if($this->db->affected_rows() >0 ) {
             //$this->session->set_flashdata('success', 'Data berhasil disimpan');
             echo "<script>
-<<<<<<< HEAD
-=======
-				alert('Data berhasil disimpan');
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 				window.location='".site_url('bimbel_yang_sedang_terdaftar')."'
 				</script>";
         }

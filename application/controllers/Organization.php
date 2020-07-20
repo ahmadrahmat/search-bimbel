@@ -58,7 +58,7 @@ class Organization extends CI_Controller {
             $this->template->load('template', 'organization/organization_form', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
-            echo "<script>window.location='".site_url('organization')."';</script>";
+            echo "<script>window.location='".site_url('bimbel')."';</script>";
         }
     }
 
@@ -74,7 +74,7 @@ class Organization extends CI_Controller {
         if($this->db->affected_rows() >0 ) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('organization');
+        redirect('bimbel');
     }
 
     public function delete($id)
@@ -83,7 +83,7 @@ class Organization extends CI_Controller {
         if($this->db->affected_rows() > 0) {
             echo "<script>alert('Data berhasil dihapus');</script>";
         }
-        echo "<script>window.location='".site_url('organization')."';</script>";
+        echo "<script>window.location='".site_url('bimbel')."';</script>";
 	}
 
 	public function switchss()

@@ -5,7 +5,7 @@
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block"><?= ucfirst($page) ?> Subject</h6>
+		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block"><?= $page=='add' ? 'Create' : ucfirst($page) ?> Subject</h6>
 		<div style="float: right">
 			<a href="<?= site_url('subject') ?>" class="btn btn-sm btn-warning">
 				<i class="fa fa-user-undo"></i> Back

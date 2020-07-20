@@ -13,6 +13,18 @@ class Bimbel_user_m extends CI_Model
 		$query = $this->db->get();
 		return $query;
 	}
+	
+	public function check_organization($id)
+	{
+		$this->db->select('organization.*');
+		$this->db->from('organization');
+		$this->db->join('owner', 'owner.id = organization.owner_id');
+		$this->db->join('bimbel_user', 'bimbel_user.id = owner.bimbel_user_id');
+		$this->db->where('bimbel_user.id', $id);
+		$this->db->where('organization.activated', 1);
+		$query = $this->db->get();
+		return $query;
+	}
 
 	public function get($id = null)
 	{

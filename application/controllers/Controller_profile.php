@@ -63,7 +63,21 @@ class Controller_profile extends CI_Controller
 		if (isset($_POST['add'])) {
 			$this->bimbel_user_m->add($post);
 		} else if (isset($_POST['edit'])) {
-			$this->bimbel_user_m->edit($post);
+		    $username 	= $this->input->post('username', true);
+			$email 		= $this->input->post('email', true);
+			$cek 		= $this->bimbel_user_m->cekUsername($username);
+			$cekEmail 	= $this->bimbel_user_m->cekEmail($email);
+			if (count($cek) == 1) {
+				$this->session->set_flashdata('username', 'Registration failure. Username already exists!');
+				// $this->session->set_flashdata('username', 'Username already exists!');
+				redirect('profile');
+			} elseif (count($cekEmail) == 1) {
+				$this->session->set_flashdata('email', 'Registration failure. Email already exists!');
+					// $this->session->set_flashdata('email', 'Email already exists!');
+				redirect('profile');
+			} else {
+		    	$this->bimbel_user_m->edit($post);
+			}
 		}
 
 		if ($this->db->affected_rows() > 0) {
@@ -122,7 +136,7 @@ class Controller_profile extends CI_Controller
 		$post = $this->input->post(null, TRUE);
 		if (isset($_POST['edit'])) {
 			if (count(array_filter($_FILES['images']['name'])) != 0) {
-				$data = $this->model_owner->getOrganizationImages($post['id']);
+				/*$data = $this->model_owner->getOrganizationImages($post['id']);
 				if ($data->num_rows() > 0) {
 					foreach ($data->result() as $data) {
 						$target_file = './assets/uploads/' . $data->image;
@@ -131,7 +145,7 @@ class Controller_profile extends CI_Controller
 						$this->db->where('organization_id', $post['id']);
 						$this->db->delete('organization_images');
 					}
-				}
+				}*/
 
 				for ($i = 0; $i < $count; $i++) {
 					if (!empty($_FILES['images']['name'][$i])) {
@@ -187,5 +201,17 @@ class Controller_profile extends CI_Controller
 			$this->session->set_flashdata('success', 'Data berhasil disimpan');
 		}
 		redirect('profile');
+	}
+	
+	public function delete_img($id, $name)
+	{
+	    $organization_id = $this->fungsi->organization_login();
+	   	$target_file = './assets/uploads/' . $name;
+		unlink($target_file);
+
+		$this->db->where('id', $id);
+		$this->db->delete('organization_images');
+		
+		redirect('profile_organization_edit/' . $organization_id);
 	}
 }

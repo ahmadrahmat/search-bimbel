@@ -66,6 +66,7 @@ class Controller_owner extends CI_Controller {
 			$query_subject = $this->subject_m->getSubjectByOrganizationId($id = null, $this->fungsi->user_login()->id);
 
             $data = array(
+                'title' => 'New Enrollment',
                 'page' => 'edit',
 				'row' => $enrollment,
 				'student' => $query_student,
@@ -74,7 +75,7 @@ class Controller_owner extends CI_Controller {
             $this->template->load('template', 'custom_owner/subject_to_approve_form', $data);
         } else {
             echo "<script>alert('Data tidak ditemukan');";
-            echo "<script>window.location='".site_url('subject_to_approve')."';</script>";
+            echo "<script>window.location='".site_url('new_enrollment')."';</script>";
         }
     }
 
@@ -88,7 +89,7 @@ class Controller_owner extends CI_Controller {
         if($this->db->affected_rows() >0 ) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('subject_to_approve');
+        redirect('new_enrollment');
 	}
 
 	public function subject_to_approve_delete($id)
@@ -97,7 +98,7 @@ class Controller_owner extends CI_Controller {
         if($this->db->affected_rows() > 0) {
             echo "<script>alert('Data berhasil dihapus');</script>";
         }
-        echo "<script>window.location='".site_url('subject_to_approve')."';</script>";
+        echo "<script>window.location='".site_url('new_enrollment')."';</script>";
 	}
 	
 	public function approved($id)
@@ -110,7 +111,7 @@ class Controller_owner extends CI_Controller {
 		if($this->db->affected_rows() >0 ) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('subject_to_approve');
+        redirect('new_enrollment');
 	}
 
 	public function finish($id)
@@ -123,7 +124,7 @@ class Controller_owner extends CI_Controller {
 		if($this->db->affected_rows() >0 ) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('subject_ongoing');
+        redirect('ongoing_enrollment');
 	}
 
 	public function reject($id)
@@ -136,7 +137,7 @@ class Controller_owner extends CI_Controller {
 		if($this->db->affected_rows() >0 ) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }
-        redirect('subject_to_approve');
+        redirect('new_enrollment');
 	}
 	
 	//
@@ -145,6 +146,28 @@ class Controller_owner extends CI_Controller {
         $data['row'] = $this->model_owner->getEnrollmentByStatus1AndOrganizationId($this->fungsi->user_login()->id);
 		$this->template->load('template', 'custom_owner/subject_ongoing_data', $data);
 	}
+	
+	public function subject_ongoing_edit($id)
+    {
+        $query = $this->enrollment_m->get($id);
+        if($query->num_rows() > 0) {
+			$enrollment = $query->row();
+			$query_student = $this->student_m->get();
+			$query_subject = $this->subject_m->getSubjectByOrganizationId($id = null, $this->fungsi->user_login()->id);
+
+            $data = array(
+                'title' => 'Ongoing Enrollment',
+                'page' => 'edit',
+				'row' => $enrollment,
+				'student' => $query_student,
+				'subject' => $query_subject
+            );
+            $this->template->load('template', 'custom_owner/subject_to_approve_form', $data);
+        } else {
+            echo "<script>alert('Data tidak ditemukan');";
+            echo "<script>window.location='".site_url('ongoing_enrollment')."';</script>";
+        }
+    }
 
 	//
 	public function history_subject()

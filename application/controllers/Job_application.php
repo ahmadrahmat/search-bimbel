@@ -85,23 +85,33 @@ class Job_application extends CI_Controller {
         redirect('job_application');
 	}
 
-<<<<<<< HEAD
 	public function inactive($id, $tutor_id)
-=======
-	public function inactive($id)
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 	{
+		$bimbel_user_id = $this->fungsi->user_login()->id;
+		$this->db->select('organization.id as organization_id');
+		$this->db->from('organization');
+		$this->db->join('owner', 'owner.id = organization.owner_id');
+		$this->db->join('bimbel_user', 'bimbel_user.id = owner.bimbel_user_id');
+		$this->db->where('owner.bimbel_user_id', $bimbel_user_id);
+		$organization_id = $this->db->get()->row()->organization_id;
+
 		$params = array(
 			'approved' => '2',
         );
         $this->db->where('id', $id);
 		$this->db->update('job_application', $params);
-<<<<<<< HEAD
 		
-		$this->db->where('tutor_id', $tutor_id);
-        $this->db->delete('subject_tutor');
-=======
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
+		$this->db->select('*');
+		$this->db->from('subject_tutor');
+		$this->db->join('subject', 'subject.id = subject_tutor.subject_id');
+		$this->db->where('subject_tutor.tutor_id', $tutor_id);
+		$this->db->where('subject.organization_id', $organization_id);
+		$cek = $this->db->get();
+		
+		if($cek->num_rows() > 0) {
+			$this->db->query("DELETE subject_tutor.* FROM subject_tutor, subject WHERE subject.id = subject_tutor.subject_id AND subject_tutor.tutor_id = $tutor_id AND subject.organization_id = $organization_id");
+
+		}
 		if($this->db->affected_rows() >0 ) {
             $this->session->set_flashdata('success', 'Data berhasil disimpan');
         }

@@ -27,21 +27,50 @@ class Auth extends CI_Controller {
 			$query = $this->bimbel_user_m->login($post);
 			if($query->num_rows() > 0) {
 				$row = $query->row();
-				$params = array(
-					'id' => $row->id,
-					'bimbel_user_type_id' => $row->bimbel_user_type_id,
-					'log' => '1',
-				);
-				$this->session->set_userdata($params);
-				if (($row->bimbel_user_type_id == 1) OR ($row->bimbel_user_type_id == 2)) {
-					echo "<script>
-						window.location='".site_url('dashboard')."'
-						</script>";
-				} elseif (($row->bimbel_user_type_id == 3) OR ($row->bimbel_user_type_id == 4)) {
-					echo "<script>
-						window.location='".site_url('home')."'
-						</script>";
+				if($row->bimbel_user_type_id == 2){
+				    $id = $row->id;
+				    $cek = $this->bimbel_user_m->check_organization($id);
+				    if($cek->num_rows() > 0) {
+				        $params = array(
+        					'id' => $row->id,
+        					'bimbel_user_type_id' => $row->bimbel_user_type_id,
+        					'log' => '1',
+        				);
+        				$this->session->set_userdata($params);
+        				if (($row->bimbel_user_type_id == 1) OR ($row->bimbel_user_type_id == 2)) {
+        					echo "<script>
+        						window.location='".site_url('dashboard')."'
+        						</script>";
+        				} elseif (($row->bimbel_user_type_id == 3) OR ($row->bimbel_user_type_id == 4)) {
+        					echo "<script>
+        						window.location='".site_url('home')."'
+        						</script>";
+        				}
+				    } else {
+				        echo "<script>
+        					alert('Login gagal, akun anda tidak aktif. Silahkan hubungi admin.');
+        					window.location='".site_url('auth/login')."'
+        					</script>";
+				    }
+				    
+				} else {
+				    $params = array(
+    					'id' => $row->id,
+    					'bimbel_user_type_id' => $row->bimbel_user_type_id,
+    					'log' => '1',
+    				);
+    				$this->session->set_userdata($params);
+    				if (($row->bimbel_user_type_id == 1) OR ($row->bimbel_user_type_id == 2)) {
+    					echo "<script>
+    						window.location='".site_url('dashboard')."'
+    						</script>";
+    				} elseif (($row->bimbel_user_type_id == 3) OR ($row->bimbel_user_type_id == 4)) {
+    					echo "<script>
+    						window.location='".site_url('home')."'
+    						</script>";
+    				}
 				}
+			
 				
 			} else {
 				echo "<script>
@@ -104,7 +133,6 @@ class Auth extends CI_Controller {
 	public function signup()
     {
         //$post = $this->input->post(null, TRUE);
-<<<<<<< HEAD
         // if(isset($_POST['add'])) {
 			$username 	= $this->input->post('username', true);
 			$email 		= $this->input->post('email', true);
@@ -141,26 +169,6 @@ class Auth extends CI_Controller {
 			
 
 		// } 
-=======
-        if(isset($_POST['add'])) {
-			$post = array(
-				'name'                => $this->input->post('name', true),
-				'username'            => $this->input->post('username', true),
-				'password'            => $this->input->post('password', true),
-				'email'               => $this->input->post('email', true),
-				'phone'               => $this->input->post('phone', true),
-				'address'             => $this->input->post('address', true),
-				'city_id'             => $this->input->post('city_id', true),
-				'bimbel_user_type_id' => $this->input->post('bimbel_user_type_id', true)
-			);
-			$this->bimbel_user_m->add($post);
-			//print_r($post);
-			if($this->db->affected_rows() >0 ) {
-				$this->session->set_flashdata('success', 'Registration successful. Please login using your username and password!');
-			}
-			redirect('auth/login');
-		} 
->>>>>>> ab762892800215dfdf23f7987e986b0a6cc62bc7
 
         
     }

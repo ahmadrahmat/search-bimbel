@@ -1,19 +1,19 @@
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Organization</h1>
+<h1 class="h3 mb-2 text-gray-800">Bimbel</h1>
 <?php $this->view('messages'); ?>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block"><?= ucfirst($page) ?> Organization</h6>
+		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block"><?= ucfirst($page) ?> Bimbel</h6>
 		<div style="float: right">
-			<a href="<?= site_url('organization') ?>" class="btn btn-sm btn-warning">
+			<a href="<?= site_url('bimbel') ?>" class="btn btn-sm btn-warning">
 				<i class="fa fa-user-undo"></i> Back
 			</a>
 		</div>
 	</div>
 	<div class="card-body">
-		<form action="<?= site_url('organization/process') ?>" method="POST">
+		<form action="<?= site_url('bimbel/process') ?>" method="POST">
 			<div class="form-group">
 				<label>Nama <sup class="text-danger">*</sup></label>
 				<input type="hidden" name="id" value="<?= $row->id ?>">

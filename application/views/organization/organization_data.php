@@ -1,15 +1,14 @@
 <!-- Page Heading -->
-<h1 class="h3 mb-2 text-gray-800">Organization</h1>
-<p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below. For more information about DataTables, please visit the <a target="_blank" href="https://datatables.net">official DataTables documentation</a>.</p>
+<h1 class="h3 mb-2 text-gray-800">Bimbel</h1>
 
 <?php $this->view('messages'); ?>
 
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
 	<div class="card-header py-3">
-		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">Organization</h6>
+		<h6 class="m-0 font-weight-bold text-primary" style="display: inline-block">Bimbel</h6>
 		<!-- <div style="float: right">
-			<a href="<?= site_url('organization/add') ?>" class="btn btn-sm btn-primary">
+			<a href="<?= site_url('bimbel/create') ?>" class="btn btn-sm btn-primary">
 				<i class="fa fa-user-plus"></i> Create
 			</a>
 		</div> -->
@@ -81,7 +80,7 @@
 				success = data.success;
 				$("#heading").html(success);
 				$("#body").html(message);
-				window.location = "<?= site_url('organization') ?>";
+				window.location = "<?= site_url('bimbel') ?>";
 			}
 		});
 	});

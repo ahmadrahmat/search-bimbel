@@ -20,15 +20,15 @@ class Enrollment_m extends CI_Model {
     public function add($post)
     {
         $params = array(
-			'start_date'     => $post['start_date'],
-			'end_date'       => $post['end_date'],
-			'start_time'     => $post['start_time'],
-			'duration'       => $post['duration'],
+			'start_date' => $post['start_date'],
+			'end_date' => $post['end_date'],
+			'start_time' => $post['start_time'],
+			'duration' => $post['duration'],
 			'num_of_meeting' => $post['num_of_meeting'],
-			'phone'          => $post['phone'],
-			'note'           => $post['note'],
-			'student_id'     => $post['student_id'],
-			'subject_id'     => $post['subject_id']
+			'phone' => $post['phone'],
+			'note' => $post['note'],
+			'student_id' => $post['student_id'],
+			'subject_id' => $post['subject_id']
         );
         $this->db->insert('enrollment', $params);
     }
@@ -36,16 +36,16 @@ class Enrollment_m extends CI_Model {
     public function edit($post)
     {
         $params = array(
-			'start_date'     => $post['start_date'],
-			'end_date'       => $post['end_date'],
-			'start_time'     => $post['start_time'],
-			'duration'       => $post['duration'],
+			'start_date' => $post['start_date'],
+			'end_date' => $post['end_date'],
+			'start_time' => $post['start_time'],
+			'duration' => $post['duration'],
 			'num_of_meeting' => $post['num_of_meeting'],
-			'phone'          => $post['phone'],
-			'note'           => $post['note'],
-			'student_id'     => $post['student_id'],
-			'subject_id'     => $post['subject_id'],
-			'status'         => $post['status']
+			'phone' => $post['phone'],
+			'note' => $post['note'],
+			'student_id' => $post['student_id'],
+			'subject_id' => $post['subject_id'],
+			'status' => $post['status']
         );
         $this->db->where('id', $post['id']);
         $this->db->update('enrollment', $params);

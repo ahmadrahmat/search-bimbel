@@ -44,6 +44,7 @@
 								if($organization_images->num_rows() > 0) { ?>
 									<div style="margin-bottom: 5px">
 										<img src="<?=base_url('assets/uploads/'.$val->image)?>" style="width: 30%">
+										<a href="<?= site_url('controller_profile/delete_img/'.$val->id.'/'.$val->image) ?>"><i class="fa fa-times text-danger"></i></a>
 									</div>    
 						<?php } } } ?>
 						<input type="file" name="images[]" class="form-control" multiple>

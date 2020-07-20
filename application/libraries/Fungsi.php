@@ -15,6 +15,18 @@ Class Fungsi {
         return $user_data;
     }
     
+    function organization_login()
+    {
+        $id = $this->ci->session->userdata('id');
+        $this->ci->db->select('organization.id as organization_id');
+        $this->ci->db->from('owner');
+        $this->ci->db->join('organization', 'organization.owner_id = owner.id');
+        $this->ci->db->join('bimbel_user', 'bimbel_user.id = owner.bimbel_user_id');
+        $this->ci->db->where('bimbel_user.id', $id);
+        $organization_data = $this->ci->db->get()->row()->organization_id;
+        return $organization_data;
+    }
+    
     function get_student_name($id)
     {
 		$this->ci->load->model('bimbel_user_m');
